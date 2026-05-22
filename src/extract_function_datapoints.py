@@ -12,71 +12,21 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Iterable, Iterator
 
+from llm import Rits
+
 
 CONTROL_FLOW_KEYWORDS = ("if", "for", "while", "return")
-
-IO_PATTERNS = (
-    r"\bprintf\b",
-    r"\bfprintf\b",
-    r"\bsprintf\b",
-    r"\bsnprintf\b",
-    r"\bfputs?\b",
-    r"\bfwrite\b",
-    r"\bfread\b",
-    r"\bfopen\b",
-    r"\bfclose\b",
-    r"\bread\b",
-    r"\bwrite\b",
-    r"\bopen\b",
-    r"\bclose\b",
-    r"\bgetenv\b",
-    r"\bsetenv\b",
-    r"\bunsetenv\b",
-    r"\bdlopen\b",
-    r"\bdlsym\b",
-    r"\bdlclose\b",
-    r"\bstat\b",
-    r"\baccess\b",
-    r"\bmkdir\b",
-    r"\bremove\b",
-    r"\brename\b",
-    r"\bopendir\b",
-    r"\breaddir\b",
-    r"\bclosedir\b",
-    r"RCUTILS_SAFE_FWRITE_TO_STDERR",
-)
-
-MEMORY_PATTERNS = (
-    r"\bmalloc\b",
-    r"\bcalloc\b",
-    r"\brealloc\b",
-    r"\bfree\b",
-    r"\bmemcpy\b",
-    r"\bmemmove\b",
-    r"\bmemset\b",
-    r"\bstrdup\b",
-    r"\bstrncpy\b",
-    r"\bstrcpy\b",
-    r"\bstrcat\b",
-    r"\breallocf\b",
-)
-
-HARDWARE_PATTERNS = (
-    r"\bclock_gettime\b",
-    r"\btime\b",
-    r"\blocaltime_r\b",
-    r"\blocaltime_s\b",
-    r"\blocaltime\b",
-    r"\bGetSystemTimeAsFileTime\b",
-    r"\bQueryPerformanceCounter\b",
-    r"\btimespec_get\b",
-)
+SYSTEM_PROMPT_PATH = Path(__file__).resolve().parents[1] / "configs" / "system_prompt.txt"
+LABEL_RULES_PATH = Path(__file__).resolve().parents[1] / "configs" / "label_rules.json"
+DEFAULT_LLM_MODEL = os.environ.get("RITS_MODEL", "moonshotai/Kimi-K2.5")
 
 
 @dataclass(frozen=True)
@@ -261,105 +211,154 @@ def find_signature_start_line(lines: list[str], body_open_line: int, function_na
 
 
 def infer_high_level_purpose(function_name: str, function_code: str) -> str:
+    raw_purpose = query_high_level_purpose(function_name, function_code)
+    purpose = normalize_high_level_purpose(raw_purpose)
+    if purpose:
+        return purpose
+    
+    return fallback_high_level_purpose(function_name, function_code)
+
+
+def load_system_prompt() -> str:
+    return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8").strip()
+
+
+@lru_cache(maxsize=1)
+def load_label_rules() -> dict:
+    return json.loads(LABEL_RULES_PATH.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
+def get_llm_client() -> Rits:
+    return Rits(model=DEFAULT_LLM_MODEL)
+
+
+def build_user_prompt(function_name: str, function_code: str) -> str:
+    return (
+        "Label the purpose of the following C function.\n\n"
+        f"Function name: {function_name}\n"
+        "Function code:\n"
+        "```c\n"
+        f"{function_code.rstrip()}\n"
+        "```\n\n"
+        "Return only valid JSON with one string field named high_level_purpose."
+    )
+
+
+def build_llm_prompt(function_name: str, function_code: str) -> str:
+    system_prompt = load_system_prompt()
+    user_prompt = build_user_prompt(function_name, function_code)
+    return f"SYSTEM:\n{system_prompt}\n\nUSER:\n{user_prompt}\n\nASSISTANT:\n"
+
+
+def query_high_level_purpose(function_name: str, function_code: str) -> str:
+    prompt = build_llm_prompt(function_name, function_code)
+    return get_llm_client().generate_text(prompt, max_tokens=64)
+
+
+def normalize_high_level_purpose(raw_purpose: str) -> str:
+    purpose = raw_purpose.strip()
+    if not purpose:
+        return ""
+    if purpose.startswith("Error:"):
+        return ""
+    if purpose.startswith("{") and purpose.endswith("}"):
+        try:
+            payload = json.loads(purpose)
+        except json.JSONDecodeError:
+            payload = None
+        if isinstance(payload, dict):
+            json_value = payload.get("high_level_purpose")
+            if isinstance(json_value, str) and json_value.strip():
+                purpose = json_value.strip()
+    quoted_matches = re.findall(r'"([^"]{3,200})"|\'([^\']{3,200})\'', purpose)
+    if quoted_matches:
+        for double_quoted, single_quoted in reversed(quoted_matches):
+            candidate = double_quoted or single_quoted
+            if candidate.strip():
+                purpose = candidate.strip()
+                break
+    lower_purpose = purpose.lower()
+    for marker in ("high_level_purpose:", "purpose:", "phrase:", "answer:", "label:"):
+        marker_index = lower_purpose.rfind(marker)
+        if marker_index != -1:
+            purpose = purpose[marker_index + len(marker) :].strip()
+            lower_purpose = purpose.lower()
+    purpose = purpose.removeprefix("Purpose:").removeprefix("purpose:").strip()
+    purpose = purpose.strip('"\'`')
+    purpose = re.sub(r"\s+", " ", purpose)
+    if len(purpose.split()) > 12 and "." in purpose:
+        tail = purpose.rsplit(".", 1)[-1].strip()
+        if 3 <= len(tail.split()) <= 12:
+            purpose = tail
+    if len(purpose) > 120:
+        purpose = purpose[:120].rsplit(" ", 1)[0].strip()
+    if not is_concise_purpose(purpose):
+        return ""
+    return purpose
+
+
+def is_concise_purpose(purpose: str) -> bool:
+    if not purpose:
+        return False
+    if any(marker in purpose for marker in ("{", "}", "(", ")", ";", "[", "]", "```")):
+        return False
+    if any(ch in purpose for ch in (".", ":", "?", "!", "=", "/", "\\")):
+        return False
+    if re.search(r"\b(static|return|void|size_t|const|struct|while|typedef|include)\b", purpose, re.IGNORECASE):
+        return False
+    word_count = len(purpose.split())
+    if word_count < 3 or word_count > 12:
+        return False
+    return True
+
+
+def fallback_high_level_purpose(function_name: str, function_code: str) -> str:
     lowered_name = function_name.lower()
     compact_name = lowered_name.removeprefix("rcutils_").removeprefix("__")
     compact_name = compact_name.replace("__", "_")
     code = function_code.lower()
+    rules = load_label_rules()
 
-    if "strdup" in lowered_name:
-        return "duplicates a string using the provided allocator"
-    if "reallocf" in lowered_name:
-        return "reallocates memory and frees the original buffer on failure"
-    if "reallocate" in lowered_name or "realloc" in lowered_name:
-        return "reallocates memory"
-    if "deallocate" in lowered_name:
-        return "deallocates memory"
-    if "allocate" in lowered_name and "default" in lowered_name:
-        return "provides a default memory allocation callback"
-    if "zero_initialized" in lowered_name:
-        return "returns a zero-initialized data structure"
-    if "allocator_is_valid" in lowered_name:
-        return "validates that an allocator has all required callbacks"
-    if "time_point" in lowered_name and "string" in lowered_name:
-        return "formats a time point into a string representation"
-    if "logging" in lowered_name and "initialize" in lowered_name:
-        return "initializes the logging subsystem"
-    if "logging" in lowered_name and "shutdown" in lowered_name:
-        return "shuts down the logging subsystem"
-    if "env" in lowered_name and ("get" in lowered_name or "set" in lowered_name):
-        return "reads or writes an environment variable"
-    if "shared_library" in lowered_name:
-        return "loads, unloads, or queries a shared library"
-    if "hash_map" in lowered_name:
-        return "manages a hash map data structure"
-    if "string_array" in lowered_name:
-        return "manages a string array data structure"
-    if "string_map" in lowered_name:
-        return "manages a string-to-string map data structure"
-    if "process" in lowered_name:
-        return "interacts with process state or process identifiers"
-    if "find" in lowered_name:
-        return "searches for a substring within a buffer"
-    if "split" in lowered_name:
-        return "splits a string into multiple substrings"
-    if "join" in lowered_name:
-        return "joins strings into a single buffer"
-    if "format_string" in lowered_name:
-        return "formats text with allocator-backed buffers"
-    if "snprintf" in lowered_name:
-        return "formats text into a fixed-size buffer"
-    if "qsort" in lowered_name:
-        return "sorts data using a comparator"
-    if "strcmp" in lowered_name or "strcasecmp" in lowered_name:
-        return "compares two strings"
-    if "strnlen" in lowered_name:
-        return "measures the length of a bounded string"
+    matched = match_rule(compact_name, rules.get("purpose_rules", []))
+    if matched:
+        return matched
 
-    body_signals: list[str] = []
-    if re.search(r"\b(malloc|calloc|realloc|free|strdup|memcpy|memmove|memset)\b", code):
-        body_signals.append("memory")
-    if re.search(r"\b(fopen|fclose|fprintf|printf|snprintf|fread|fwrite|getenv|setenv|unsetenv|dlopen|dlsym|dlclose)\b", code):
-        body_signals.append("io")
-    if re.search(r"\b(clock_gettime|time\(|localtime_r|localtime_s|localtime|timespec_get)\b", code):
-        body_signals.append("hardware")
-
-    if body_signals:
-        signal_text = ", ".join(body_signals)
+    side_effects = detect_side_effects(code)
+    if side_effects:
+        signal_text = ", ".join(side_effects)
         return f"handles {signal_text} concerns for {compact_name.replace('_', ' ')}"
 
-    verb_map = {
-        "get": "returns",
-        "is": "checks whether",
-        "set": "sets",
-        "create": "creates",
-        "destroy": "destroys",
-        "free": "frees",
-        "init": "initializes",
-        "initialize": "initializes",
-        "fini": "finalizes",
-        "finalize": "finalizes",
-        "parse": "parses",
-        "format": "formats",
-        "compare": "compares",
-        "find": "finds",
-        "split": "splits",
-        "join": "joins",
-        "copy": "copies",
-        "remove": "removes",
-        "add": "adds",
-        "clear": "clears",
-        "load": "loads",
-        "unload": "unloads",
-        "open": "opens",
-        "close": "closes",
-        "write": "writes",
-        "read": "reads",
-        "allocate": "allocates",
-        "deallocate": "deallocates",
-        "reallocate": "reallocates",
-    }
-    tokens = compact_name.split("_") if compact_name else [function_name]
-    verb = tokens[0] if tokens else function_name
+    return build_fallback_purpose(compact_name, rules.get("purpose_fallback_verbs", {}))
+
+
+def match_rule(compact_name: str, rules: list[dict]) -> str:
+    for rule in rules:
+        if rule_matches(compact_name, rule):
+            return rule["purpose"]
+    return ""
+
+
+def rule_matches(compact_name: str, rule: dict) -> bool:
+    tokens = compact_name.split("_") if compact_name else []
+    required = rule.get("all", [])
+    optional = rule.get("any", [])
+    if required and not all(any(fragment in token or fragment in compact_name for token in tokens) for fragment in required):
+        return False
+    if optional and not any(any(fragment in token or fragment in compact_name for token in tokens) for fragment in optional):
+        return False
+    return True
+
+
+def detect_side_effects(code: str) -> list[str]:
+    rules = load_label_rules().get("side_effect_patterns", {})
+    labels = [label for label, patterns in rules.items() if any(re.search(pattern, code) for pattern in patterns)]
+    return labels
+
+
+def build_fallback_purpose(compact_name: str, verb_map: dict[str, str]) -> str:
+    tokens = compact_name.split("_") if compact_name else [compact_name]
+    verb = tokens[0] if tokens else compact_name
     remainder = " ".join(tokens[1:]).strip()
     if verb in verb_map:
         return f"{verb_map[verb]} {remainder}".strip()
@@ -372,16 +371,8 @@ def infer_control_flow_elements(function_code: str) -> list[str]:
 
 
 def infer_side_effects(function_code: str) -> list[str]:
-    labels: list[str] = []
-    if any(re.search(pattern, function_code) for pattern in IO_PATTERNS):
-        labels.append("io")
-    if any(re.search(pattern, function_code) for pattern in MEMORY_PATTERNS):
-        labels.append("memory")
-    if any(re.search(pattern, function_code) for pattern in HARDWARE_PATTERNS):
-        labels.append("hardware")
-    if not labels:
-        labels.append("none")
-    return labels
+    labels = detect_side_effects(function_code)
+    return labels if labels else ["none"]
 
 
 def extract_function_records(file_path: Path) -> list[FunctionRecord]:
