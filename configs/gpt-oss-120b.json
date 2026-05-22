@@ -1,9 +1,0 @@
-{
-    "model_id": "openai/gpt-oss-120b",
-    "model_id_rits": "openai/gpt-oss-120b",
-    "parameters": {
-        "decoding_method": "greedy",
-        "min_new_tokens": 1,
-        "max_new_tokens": 1024
-    }
-}
