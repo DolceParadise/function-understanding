@@ -1,16 +1,96 @@
 {
-  "cluster_count": 3,
+  "cluster_count": 5,
   "clusters": [
     {
       "cluster_id": 0,
-      "size": 156,
+      "size": 100,
+      "dominant_purpose": "checks if key exists in string map",
+      "dominant_purpose_count": 4,
+      "purpose_counts": {
+        "checks if key exists in string map": 4,
+        "finds last occurrence of delimiter in string": 3,
+        "advances directory iterator to next entry": 2,
+        "calculates total size of directory recursively": 2,
+        "compares two strings case-insensitively up to n characters": 2,
+        "compares two strings for sorting": 2,
+        "computes string length up to maximum": 2,
+        "converts path separators to native format": 2,
+        "duplicates string up to max length": 2,
+        "finalizes directory iterator and releases resources": 2,
+        "finds first occurrence of delimiter in string": 2,
+        "initializes a string map with given capacity": 2,
+        "removes first directory from list": 2,
+        "starts directory iteration": 2,
+        "validates allocator function pointers": 2,
+        "accumulates directory size recursively with depth limit": 1,
+        "adds subdirectory to list and sums file sizes": 1,
+        "calculates total directory size recursively": 1,
+        "calculates total size of directory": 1,
+        "checks if command-line option exists": 1,
+        "checks if command-line option exists in argument array": 1,
+        "checks if two strings are equal": 1,
+        "clears all key-value pairs from string map": 1,
+        "closes process handle and deallocates": 1,
+        "closes process handle and frees process object": 1,
+        "compares two strings case-insensitively": 1,
+        "compares two strings case\u2011insensitively": 1,
+        "compares two strings for equality up to count": 1,
+        "copies all entries from source string map to destination": 1,
+        "copies all key-value pairs from source to destination string map": 1,
+        "deallocates key-value pair at index": 1,
+        "deallocates linked list of directory paths": 1,
+        "deallocates memory using standard free": 1,
+        "duplicates a null-terminated string": 1,
+        "duplicates string with allocator": 1,
+        "expands leading tilde to home directory": 1,
+        "expands leading tilde to home directory in path": 1,
+        "finalizes and deallocates string map": 1,
+        "finalizes string map and releases resources": 1,
+        "finds delimiter position in string": 1,
+        "finds delimiter position in string segment": 1,
+        "finds index of key in string map": 1,
+        "finds index of matching key in string map": 1,
+        "finds last delimiter position": 1,
+        "frees allocated memory": 1,
+        "frees directory list memory": 1,
+        "gets next key from string map": 1,
+        "gets string map capacity": 1,
+        "gets value for key of given length": 1,
+        "joins two filesystem paths with delimiter": 1,
+        "joins two path components": 1,
+        "reallocates memory and frees original on failure": 1,
+        "reallocates memory block": 1,
+        "reallocates memory using allocator, freeing old pointer on failure": 1,
+        "reallocates memory using standard realloc": 1,
+        "removes all entries from string map": 1,
+        "removes entry from string map": 1,
+        "removes key-value pair at index": 1,
+        "removes key-value pair from string map": 1,
+        "replaces all occurrences of a substring in a string": 1,
+        "replaces substring occurrences in a string": 1,
+        "reserves capacity for string map": 1,
+        "reserves capacity for string map key-value pairs": 1,
+        "retrieves current executable name": 1,
+        "retrieves executable name as string": 1,
+        "retrieves next key in string map": 1,
+        "retrieves number of entries in string map": 1,
+        "retrieves string map capacity": 1,
+        "retrieves the number of entries in a string map": 1,
+        "retrieves value by key from string map": 1,
+        "retrieves value for a command-line option": 1,
+        "retrieves value for key from string map": 1,
+        "retrieves value for key in string map": 1,
+        "retrieves value of a command-line option": 1,
+        "sets key-value pair in string map": 1,
+        "sets key-value pair in string map with automatic resizing": 1,
+        "sets key-value pair in string map without resizing": 1,
+        "sets string map entry without resizing": 1,
+        "sorts array using quicksort": 1,
+        "sorts array using quicksort with custom comparator": 1,
+        "spawns a new process with given arguments": 1,
+        "starts a new process with given arguments": 1
+      },
       "functions": [
-        {
-          "function_name": "__default_allocate",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "allocates memory with malloc"
-        },
         {
           "function_name": "__default_deallocate",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
@@ -24,24 +104,6 @@
           "label": "reallocates memory block"
         },
         {
-          "function_name": "__default_zero_allocate",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "allocates zero-initialized memory"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_allocator",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "provides a zero-initialized allocator"
-        },
-        {
-          "function_name": "rcutils_get_default_allocator",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "provides default memory allocator"
-        },
-        {
           "function_name": "rcutils_allocator_is_valid",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -52,144 +114,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "reallocates memory and frees original on failure"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_array_list",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns zero-initialized array list"
-        },
-        {
-          "function_name": "rcutils_array_list_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes array list with given capacity and element size"
-        },
-        {
-          "function_name": "rcutils_array_list_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finalizes array list and releases memory"
-        },
-        {
-          "function_name": "rcutils_array_list_increase_capacity",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "expands array list capacity"
-        },
-        {
-          "function_name": "rcutils_array_list_get_pointer_for_index",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves pointer to element at given index"
-        },
-        {
-          "function_name": "rcutils_array_list_add",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "adds element to array list"
-        },
-        {
-          "function_name": "rcutils_array_list_set",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "sets array list element at specified index"
-        },
-        {
-          "function_name": "rcutils_array_list_remove",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "removes element at index from array list"
-        },
-        {
-          "function_name": "rcutils_array_list_get",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "copies element at index to output buffer"
-        },
-        {
-          "function_name": "rcutils_array_list_get_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves array list size"
-        },
-        {
-          "function_name": "rcutils_decode_base64",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "decodes base64 string to byte array"
-        },
-        {
-          "function_name": "rcutils_encode_base64",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "encodes byte array as base64 string"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_char_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns a zero-initialized character array"
-        },
-        {
-          "function_name": "rcutils_char_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes a dynamic character array"
-        },
-        {
-          "function_name": "rcutils_char_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finalizes character array and releases buffer"
-        },
-        {
-          "function_name": "rcutils_char_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "resizes character array buffer"
-        },
-        {
-          "function_name": "rcutils_char_array_expand_as_needed",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "expands character array capacity as needed"
-        },
-        {
-          "function_name": "_rcutils_char_array_vsprintf",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "writes formatted string to char array"
-        },
-        {
-          "function_name": "rcutils_char_array_vsprintf",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "writes formatted string into char array"
-        },
-        {
-          "function_name": "rcutils_char_array_memcpy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "copies memory into char array"
-        },
-        {
-          "function_name": "rcutils_char_array_strcpy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "copies string into char array"
-        },
-        {
-          "function_name": "rcutils_char_array_strncat",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "appends up to n characters to char array"
-        },
-        {
-          "function_name": "rcutils_char_array_strcat",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "appends string to char array"
         },
         {
           "function_name": "rcutils_cli_option_exist",
@@ -208,12 +132,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "checks if two strings are equal"
-        },
-        {
-          "function_name": "rcutils_is_directory",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "checks whether path is a directory"
         },
         {
           "function_name": "rcutils_join_path",
@@ -282,12 +200,6 @@
           "label": "finalizes directory iterator and releases resources"
         },
         {
-          "function_name": "rcutils_get_file_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves size of a file"
-        },
-        {
           "function_name": "rcutils_find",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/find.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -312,34 +224,10 @@
           "label": "finds last delimiter position"
         },
         {
-          "function_name": "rcutils_format_string_limit",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/format_string.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "formats string with size limit using allocator"
-        },
-        {
-          "function_name": "rcutils_join",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/join.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "joins string array using separator"
-        },
-        {
           "function_name": "rcutils_get_executable_name",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "retrieves executable name as string"
-        },
-        {
-          "function_name": "append_backslashes",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "appends backslashes to char array"
-        },
-        {
-          "function_name": "build_command_line",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "constructs command line string with proper quoting"
         },
         {
           "function_name": "rcutils_start_process",
@@ -366,24 +254,6 @@
           "label": "replaces substring occurrences in a string"
         },
         {
-          "function_name": "rcutils_load_shared_library",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "loads shared library and stores its path"
-        },
-        {
-          "function_name": "rcutils_split",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "splits string into array by delimiter"
-        },
-        {
-          "function_name": "rcutils_split_last",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "splits string on last delimiter"
-        },
-        {
           "function_name": "rcutils_strcasecmp",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strcasecmp.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -408,76 +278,118 @@
           "label": "duplicates string up to max length"
         },
         {
-          "function_name": "rcutils_get_zero_initialized_string_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns zero-initialized string array"
-        },
-        {
-          "function_name": "rcutils_string_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes a string array"
-        },
-        {
-          "function_name": "rcutils_string_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finalizes string array and releases memory"
-        },
-        {
-          "function_name": "rcutils_string_array_cmp",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "compares two string arrays lexicographically"
-        },
-        {
-          "function_name": "rcutils_string_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "resizes string array"
-        },
-        {
           "function_name": "rcutils_string_array_sort_compare",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "compares two strings for sorting"
         },
         {
+          "function_name": "rcutils_string_map_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes a string map with given capacity"
+        },
+        {
+          "function_name": "rcutils_string_map_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finalizes string map and releases resources"
+        },
+        {
+          "function_name": "rcutils_string_map_get_capacity",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "gets string map capacity"
+        },
+        {
+          "function_name": "rcutils_string_map_get_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves number of entries in string map"
+        },
+        {
+          "function_name": "__remove_key_and_value_at_index",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "removes key-value pair at index"
+        },
+        {
+          "function_name": "rcutils_string_map_reserve",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "reserves capacity for string map"
+        },
+        {
+          "function_name": "rcutils_string_map_clear",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "removes all entries from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_set",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "sets key-value pair in string map"
+        },
+        {
+          "function_name": "__get_index_of_key_if_exists",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finds index of key in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_set_no_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "sets string map entry without resizing"
+        },
+        {
+          "function_name": "rcutils_string_map_unset",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "removes entry from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_key_exists",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "checks if key exists in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_key_existsn",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "checks if key exists in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_get",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves value for key from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_getn",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "gets value for key of given length"
+        },
+        {
+          "function_name": "rcutils_string_map_get_next_key",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "gets next key from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_copy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "copies all entries from source string map to destination"
+        },
+        {
           "function_name": "rcutils_strnlen",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strnlen.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "computes string length up to maximum"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_uint8_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns zero-initialized uint8 array"
-        },
-        {
-          "function_name": "rcutils_uint8_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes uint8 array with specified capacity"
-        },
-        {
-          "function_name": "rcutils_uint8_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finalizes uint8 array"
-        },
-        {
-          "function_name": "rcutils_uint8_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "resizes uint8 array buffer"
-        },
-        {
-          "function_name": "__default_allocate",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "allocates memory using malloc"
         },
         {
           "function_name": "__default_deallocate",
@@ -492,24 +404,6 @@
           "label": "reallocates memory using standard realloc"
         },
         {
-          "function_name": "__default_zero_allocate",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "allocates zero-initialized memory"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_allocator",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized allocator"
-        },
-        {
-          "function_name": "rcutils_get_default_allocator",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns default memory allocator"
-        },
-        {
           "function_name": "rcutils_allocator_is_valid",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -520,144 +414,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "reallocates memory using allocator, freeing old pointer on failure"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_array_list",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized array list"
-        },
-        {
-          "function_name": "rcutils_array_list_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes a dynamic array list with allocator"
-        },
-        {
-          "function_name": "rcutils_array_list_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "finalizes and deallocates array list"
-        },
-        {
-          "function_name": "rcutils_array_list_increase_capacity",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "doubles array list capacity"
-        },
-        {
-          "function_name": "rcutils_array_list_get_pointer_for_index",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "computes pointer to element at index"
-        },
-        {
-          "function_name": "rcutils_array_list_add",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "appends element to dynamic array list"
-        },
-        {
-          "function_name": "rcutils_array_list_set",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets element at index in array list"
-        },
-        {
-          "function_name": "rcutils_array_list_remove",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "removes element from array list by index"
-        },
-        {
-          "function_name": "rcutils_array_list_get",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves element at index from array list"
-        },
-        {
-          "function_name": "rcutils_array_list_get_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves the number of elements in an array list"
-        },
-        {
-          "function_name": "rcutils_decode_base64",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "decodes base64 string to byte array"
-        },
-        {
-          "function_name": "rcutils_encode_base64",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "encodes byte array to base64 string"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_char_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized character array"
-        },
-        {
-          "function_name": "rcutils_char_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes a resizable character array with allocator"
-        },
-        {
-          "function_name": "rcutils_char_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "finalizes a character array"
-        },
-        {
-          "function_name": "rcutils_char_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "resizes dynamic character array buffer"
-        },
-        {
-          "function_name": "rcutils_char_array_expand_as_needed",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "expands character array buffer to accommodate new size"
-        },
-        {
-          "function_name": "_rcutils_char_array_vsprintf",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "formats string into character array buffer"
-        },
-        {
-          "function_name": "rcutils_char_array_vsprintf",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "formats and appends formatted string to dynamic character array"
-        },
-        {
-          "function_name": "rcutils_char_array_memcpy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "copies source bytes into resizable character array"
-        },
-        {
-          "function_name": "rcutils_char_array_strcpy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "copies string into character array"
-        },
-        {
-          "function_name": "rcutils_char_array_strncat",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "appends up to n characters to a dynamic character array"
-        },
-        {
-          "function_name": "rcutils_char_array_strcat",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "appends string to character array"
         },
         {
           "function_name": "rcutils_cli_option_exist",
@@ -676,12 +432,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "compares two strings for equality up to count"
-        },
-        {
-          "function_name": "rcutils_is_directory",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if path is a directory"
         },
         {
           "function_name": "rcutils_join_path",
@@ -750,12 +500,6 @@
           "label": "finalizes directory iterator and releases resources"
         },
         {
-          "function_name": "rcutils_get_file_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns size of file at path"
-        },
-        {
           "function_name": "rcutils_find",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/find.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -780,34 +524,10 @@
           "label": "finds last occurrence of delimiter in string"
         },
         {
-          "function_name": "rcutils_format_string_limit",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/format_string.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "formats string with length limit using allocator"
-        },
-        {
-          "function_name": "rcutils_join",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/join.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "joins string array with separator"
-        },
-        {
           "function_name": "rcutils_get_executable_name",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "retrieves current executable name"
-        },
-        {
-          "function_name": "append_backslashes",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "appends backslash characters to character array"
-        },
-        {
-          "function_name": "build_command_line",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "joins string array into quoted command line"
         },
         {
           "function_name": "rcutils_start_process",
@@ -834,24 +554,6 @@
           "label": "replaces all occurrences of a substring in a string"
         },
         {
-          "function_name": "rcutils_load_shared_library",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "loads a shared library and resolves its full path"
-        },
-        {
-          "function_name": "rcutils_split",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "splits string by delimiter into array"
-        },
-        {
-          "function_name": "rcutils_split_last",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "splits string at last delimiter occurrence"
-        },
-        {
           "function_name": "rcutils_strcasecmp",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strcasecmp.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -876,76 +578,188 @@
           "label": "duplicates string up to max length"
         },
         {
-          "function_name": "rcutils_get_zero_initialized_string_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized string array"
-        },
-        {
-          "function_name": "rcutils_string_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes string array with allocator"
-        },
-        {
-          "function_name": "rcutils_string_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "deallocates string array contents and resets state"
-        },
-        {
-          "function_name": "rcutils_string_array_cmp",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "lexicographically compares two string arrays"
-        },
-        {
-          "function_name": "rcutils_string_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "resizes string array to new size"
-        },
-        {
           "function_name": "rcutils_string_array_sort_compare",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "compares two strings for sorting"
         },
         {
+          "function_name": "rcutils_string_map_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes a string map with given capacity"
+        },
+        {
+          "function_name": "rcutils_string_map_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "finalizes and deallocates string map"
+        },
+        {
+          "function_name": "rcutils_string_map_get_capacity",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves string map capacity"
+        },
+        {
+          "function_name": "rcutils_string_map_get_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves the number of entries in a string map"
+        },
+        {
+          "function_name": "__remove_key_and_value_at_index",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "deallocates key-value pair at index"
+        },
+        {
+          "function_name": "rcutils_string_map_reserve",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "reserves capacity for string map key-value pairs"
+        },
+        {
+          "function_name": "rcutils_string_map_clear",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "clears all key-value pairs from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_set",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets key-value pair in string map with automatic resizing"
+        },
+        {
+          "function_name": "__get_index_of_key_if_exists",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "finds index of matching key in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_set_no_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets key-value pair in string map without resizing"
+        },
+        {
+          "function_name": "rcutils_string_map_unset",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "removes key-value pair from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_key_exists",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if key exists in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_key_existsn",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if key exists in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_get",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves value for key in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_getn",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves value by key from string map"
+        },
+        {
+          "function_name": "rcutils_string_map_get_next_key",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves next key in string map"
+        },
+        {
+          "function_name": "rcutils_string_map_copy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "copies all key-value pairs from source to destination string map"
+        },
+        {
           "function_name": "rcutils_strnlen",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strnlen.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "computes string length up to maximum"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_uint8_array",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized uint8 array"
-        },
-        {
-          "function_name": "rcutils_uint8_array_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes uint8 array with allocator"
-        },
-        {
-          "function_name": "rcutils_uint8_array_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "deallocates uint8 array buffer"
-        },
-        {
-          "function_name": "rcutils_uint8_array_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "resizes uint8 array buffer"
         }
       ]
     },
     {
       "cluster_id": 1,
-      "size": 104,
+      "size": 66,
+      "dominant_purpose": "returns zero-initialized hash map",
+      "dominant_purpose_count": 2,
+      "purpose_counts": {
+        "checks if key exists in hash map": 2,
+        "finalizes SHA-256 hash computation": 2,
+        "initializes SHA-256 context": 2,
+        "inserts entry into hash map bucket": 2,
+        "retrieves hash map capacity": 2,
+        "returns zero-initialized hash map": 2,
+        "allocates and initializes hash map buckets": 1,
+        "allocates and zero-initializes hash map bucket array": 1,
+        "chooses bits from y or z using x": 1,
+        "compares two string keys for hash map": 1,
+        "compares two strings": 1,
+        "computes SHA-256 Sigma0 function": 1,
+        "computes SHA-256 Sigma1 function": 1,
+        "computes SHA-256 compression function on 64-byte block": 1,
+        "computes SHA-256 sigma0 transformation": 1,
+        "computes SHA-256 sigma1 function": 1,
+        "computes SHA-256 sigma1 transformation": 1,
+        "computes SHA-256 small sigma0": 1,
+        "computes SHA-256 \u03a30 transformation": 1,
+        "computes SHA-256 \u03a31 function": 1,
+        "computes bitwise choice of three 32-bit values": 1,
+        "computes bitwise majority of three 32-bit values": 1,
+        "computes djb2 hash of null-terminated string": 1,
+        "computes hash of a string": 1,
+        "computes majority of three words": 1,
+        "computes next power of two": 1,
+        "computes next power of two for size": 1,
+        "deallocates hash map buckets and entries": 1,
+        "deallocates hash map buckets and optional entries": 1,
+        "deallocates hash map entry and its key-value pair": 1,
+        "expands hash map when load factor exceeded": 1,
+        "finalizes and deallocates hash map": 1,
+        "finalizes hash map and releases memory": 1,
+        "finds entry in hash map": 1,
+        "gets next key and associated data": 1,
+        "grows hash map capacity when load factor exceeded": 1,
+        "initializes a hash map": 1,
+        "initializes base64 character decoding lookup table": 1,
+        "initializes base64 character lookup map": 1,
+        "initializes base64 character map": 1,
+        "initializes base64 encoding map": 1,
+        "initializes hash map with allocator and key functions": 1,
+        "inserts or updates entry in hash map": 1,
+        "inserts or updates key-value pair in hash map": 1,
+        "locates hash map entry by key": 1,
+        "removes key from hash map": 1,
+        "removes key-value pair from hash map": 1,
+        "retrieves current element count of hash map": 1,
+        "retrieves hash map size": 1,
+        "retrieves next key-value pair from hash map": 1,
+        "retrieves value associated with key from hash map": 1,
+        "retrieves value for a key from hash map": 1,
+        "returns smaller of two sizes": 1,
+        "returns the smaller of two size values": 1,
+        "rotates 32-bit integer right": 1,
+        "rotates 32-bit integer right by b bits": 1,
+        "unlabeled": 1,
+        "updates SHA-256 context with input data": 1,
+        "updates SHA-256 hash with data": 1,
+        "updates SHA-256 state with a data block": 1
+      },
       "functions": [
         {
           "function_name": "initialize_base64_map_callback",
@@ -1074,12 +888,6 @@
           "label": "gets next key and associated data"
         },
         {
-          "function_name": "add_key_to_hash_map",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "adds or updates logger severity level in hash map"
-        },
-        {
           "function_name": "min",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/sha256.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -1150,114 +958,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/sha256.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "finalizes SHA-256 hash computation"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_string_map",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns zero-initialized string map"
-        },
-        {
-          "function_name": "rcutils_string_map_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes a string map with given capacity"
-        },
-        {
-          "function_name": "rcutils_string_map_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finalizes string map and releases resources"
-        },
-        {
-          "function_name": "rcutils_string_map_get_capacity",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "gets string map capacity"
-        },
-        {
-          "function_name": "rcutils_string_map_get_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves number of entries in string map"
-        },
-        {
-          "function_name": "__remove_key_and_value_at_index",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "removes key-value pair at index"
-        },
-        {
-          "function_name": "rcutils_string_map_reserve",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "reserves capacity for string map"
-        },
-        {
-          "function_name": "rcutils_string_map_clear",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "removes all entries from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_set",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "sets key-value pair in string map"
-        },
-        {
-          "function_name": "__get_index_of_key_if_exists",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "finds index of key in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_set_no_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "sets string map entry without resizing"
-        },
-        {
-          "function_name": "rcutils_string_map_unset",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "removes entry from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_key_exists",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "checks if key exists in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_key_existsn",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "checks if key exists in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_get",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves value for key from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_getn",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "gets value for key of given length"
-        },
-        {
-          "function_name": "rcutils_string_map_get_next_key",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "gets next key from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_copy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "copies all entries from source string map to destination"
         },
         {
           "function_name": "initialize_base64_map_callback",
@@ -1386,12 +1086,6 @@
           "label": "retrieves next key-value pair from hash map"
         },
         {
-          "function_name": "add_key_to_hash_map",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "adds or updates logger severity level in hash map"
-        },
-        {
           "function_name": "min",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/sha256.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -1462,121 +1156,130 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/sha256.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "finalizes SHA-256 hash computation"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_string_map",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized string map"
-        },
-        {
-          "function_name": "rcutils_string_map_init",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes a string map with given capacity"
-        },
-        {
-          "function_name": "rcutils_string_map_fini",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "finalizes and deallocates string map"
-        },
-        {
-          "function_name": "rcutils_string_map_get_capacity",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves string map capacity"
-        },
-        {
-          "function_name": "rcutils_string_map_get_size",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves the number of entries in a string map"
-        },
-        {
-          "function_name": "__remove_key_and_value_at_index",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "deallocates key-value pair at index"
-        },
-        {
-          "function_name": "rcutils_string_map_reserve",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "reserves capacity for string map key-value pairs"
-        },
-        {
-          "function_name": "rcutils_string_map_clear",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "clears all key-value pairs from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_set",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets key-value pair in string map with automatic resizing"
-        },
-        {
-          "function_name": "__get_index_of_key_if_exists",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "finds index of matching key in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_set_no_resize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets key-value pair in string map without resizing"
-        },
-        {
-          "function_name": "rcutils_string_map_unset",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "removes key-value pair from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_key_exists",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if key exists in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_key_existsn",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if key exists in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_get",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves value for key in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_getn",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves value by key from string map"
-        },
-        {
-          "function_name": "rcutils_string_map_get_next_key",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves next key in string map"
-        },
-        {
-          "function_name": "rcutils_string_map_copy",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "copies all key-value pairs from source to destination string map"
         }
       ]
     },
     {
       "cluster_id": 2,
-      "size": 160,
+      "size": 94,
+      "dominant_purpose": "allocates zero-initialized memory",
+      "dominant_purpose_count": 2,
+      "purpose_counts": {
+        "allocates zero-initialized memory": 2,
+        "checks if shared library is loaded": 2,
+        "creates directory at absolute path": 2,
+        "initializes thread-local error handling storage": 2,
+        "retrieves current steady time": 2,
+        "retrieves current system time": 2,
+        "retrieves current system time in nanoseconds": 2,
+        "retrieves environment variable value": 2,
+        "retrieves symbol address from shared library": 2,
+        "returns current process identifier": 2,
+        "returns current raw steady time": 2,
+        "returns zero-initialized array list": 2,
+        "returns zero-initialized shared library handle": 2,
+        "returns zero-initialized string array": 2,
+        "returns zero-initialized string map": 2,
+        "returns zero-initialized uint8 array": 2,
+        "waits for process termination and retrieves exit code": 2,
+        "allocates memory using malloc": 1,
+        "allocates memory with malloc": 1,
+        "atomically decrement fault injection counter": 1,
+        "atomically decrements fault injection counter and returns previous value": 1,
+        "checks if error is set": 1,
+        "checks if error state is set": 1,
+        "checks if fault injection testing is complete": 1,
+        "checks if file exists": 1,
+        "checks if file path exists": 1,
+        "checks if path is a directory": 1,
+        "checks if path is a regular file": 1,
+        "checks if shared library contains symbol": 1,
+        "checks if shared library defines symbol": 1,
+        "checks if timespec represents negative time": 1,
+        "checks whether path is a directory": 1,
+        "checks whether path refers to a regular file": 1,
+        "clears current error state": 1,
+        "clears the thread-local error state": 1,
+        "determines if fault injection test is complete": 1,
+        "determines if timespec is negative": 1,
+        "formats platform-specific shared library filename": 1,
+        "generates platform-specific library filename": 1,
+        "gets current working directory": 1,
+        "loads a shared library and resolves its full path": 1,
+        "loads shared library and stores its path": 1,
+        "prints function name to stdout": 1,
+        "prints name to stdout": 1,
+        "provides a zero-initialized allocator": 1,
+        "provides default memory allocator": 1,
+        "retrieves current errno message into buffer": 1,
+        "retrieves current error message string": 1,
+        "retrieves current error state": 1,
+        "retrieves current fault injection count": 1,
+        "retrieves current raw steady time": 1,
+        "retrieves current steady time in nanoseconds": 1,
+        "retrieves current thread-local error state": 1,
+        "retrieves current user's home directory": 1,
+        "retrieves current working directory": 1,
+        "retrieves environment variable as 0, 1, empty, or error": 1,
+        "retrieves error message for current errno": 1,
+        "retrieves fault injection count": 1,
+        "retrieves formatted error message": 1,
+        "retrieves size of a file": 1,
+        "retrieves the user's home directory path": 1,
+        "returns a zero-initialized character array": 1,
+        "returns current steady time": 1,
+        "returns current steady time in nanoseconds": 1,
+        "returns default memory allocator": 1,
+        "returns size of file at path": 1,
+        "returns zero-initialized allocator": 1,
+        "returns zero-initialized character array": 1,
+        "sets environment variable": 1,
+        "sets environment variable optionally overwriting": 1,
+        "sets environment variable with optional overwrite": 1,
+        "sets environment variable with overwrite": 1,
+        "sets fault injection count": 1,
+        "sets global fault injection counter": 1,
+        "tests atomic operations for standard integer and pointer types": 1,
+        "unlabeled": 1,
+        "verifies support for various atomic types": 1
+      },
       "functions": [
+        {
+          "function_name": "__default_allocate",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "allocates memory with malloc"
+        },
+        {
+          "function_name": "__default_zero_allocate",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "allocates zero-initialized memory"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_allocator",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "provides a zero-initialized allocator"
+        },
+        {
+          "function_name": "rcutils_get_default_allocator",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "provides default memory allocator"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_array_list",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns zero-initialized array list"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_char_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns a zero-initialized character array"
+        },
         {
           "function_name": "rcutils_set_env",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
@@ -1606,18 +1309,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "initializes thread-local error handling storage"
-        },
-        {
-          "function_name": "__format_overwriting_error_state_message",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "formats error overwriting warning message"
-        },
-        {
-          "function_name": "rcutils_set_error_state",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "sets current error state"
         },
         {
           "function_name": "rcutils_error_is_set",
@@ -1650,6 +1341,12 @@
           "label": "gets current working directory"
         },
         {
+          "function_name": "rcutils_is_directory",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "checks whether path is a directory"
+        },
+        {
           "function_name": "rcutils_is_file",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -1668,16 +1365,566 @@
           "label": "creates directory at absolute path"
         },
         {
-          "function_name": "rcutils_logging_initialize",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
+          "function_name": "rcutils_get_file_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "initializes rcutils logging"
+          "label": "retrieves size of a file"
         },
         {
           "function_name": "rcutils_get_env_var_zero_or_one",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": ""
+        },
+        {
+          "function_name": "rcutils_get_pid",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns current process identifier"
+        },
+        {
+          "function_name": "rcutils_process_wait",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "waits for process termination and retrieves exit code"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_shared_library",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns zero-initialized shared library handle"
+        },
+        {
+          "function_name": "rcutils_load_shared_library",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "loads shared library and stores its path"
+        },
+        {
+          "function_name": "rcutils_get_symbol",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves symbol address from shared library"
+        },
+        {
+          "function_name": "rcutils_has_symbol",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "checks if shared library defines symbol"
+        },
+        {
+          "function_name": "rcutils_get_platform_library_name",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "generates platform-specific library filename"
+        },
+        {
+          "function_name": "rcutils_is_shared_library_loaded",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "checks if shared library is loaded"
+        },
+        {
+          "function_name": "rcutils_strerror",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strerror.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves error message for current errno"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_string_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns zero-initialized string array"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_string_map",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns zero-initialized string map"
+        },
+        {
+          "function_name": "rcutils_fault_injection_set_count",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "sets fault injection count"
+        },
+        {
+          "function_name": "rcutils_fault_injection_get_count",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves fault injection count"
+        },
+        {
+          "function_name": "rcutils_fault_injection_is_test_complete",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "determines if fault injection test is complete"
+        },
+        {
+          "function_name": "_rcutils_fault_injection_maybe_fail",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "atomically decrement fault injection counter"
+        },
+        {
+          "function_name": "would_be_negative",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "determines if timespec is negative"
+        },
+        {
+          "function_name": "rcutils_system_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current system time"
+        },
+        {
+          "function_name": "rcutils_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current steady time"
+        },
+        {
+          "function_name": "rcutils_raw_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current raw steady time"
+        },
+        {
+          "function_name": "rcutils_system_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current system time in nanoseconds"
+        },
+        {
+          "function_name": "rcutils_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current steady time in nanoseconds"
+        },
+        {
+          "function_name": "rcutils_raw_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves current steady time"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_uint8_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "returns zero-initialized uint8 array"
+        },
+        {
+          "function_name": "print_name",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/dummy_shared_library/dummy_shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "prints name to stdout"
+        },
+        {
+          "function_name": "main",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_atomics.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "verifies support for various atomic types"
+        },
+        {
+          "function_name": "__default_allocate",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "allocates memory using malloc"
+        },
+        {
+          "function_name": "__default_zero_allocate",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "allocates zero-initialized memory"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_allocator",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized allocator"
+        },
+        {
+          "function_name": "rcutils_get_default_allocator",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns default memory allocator"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_array_list",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized array list"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_char_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized character array"
+        },
+        {
+          "function_name": "rcutils_set_env",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets environment variable with overwrite"
+        },
+        {
+          "function_name": "rcutils_set_env_overwrite",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets environment variable with optional overwrite"
+        },
+        {
+          "function_name": "rcutils_get_env",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves environment variable value"
+        },
+        {
+          "function_name": "rcutils_get_home_dir",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves the user's home directory path"
+        },
+        {
+          "function_name": "rcutils_initialize_error_handling_thread_local_storage",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes thread-local error handling storage"
+        },
+        {
+          "function_name": "rcutils_error_is_set",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if error state is set"
+        },
+        {
+          "function_name": "rcutils_get_error_state",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current thread-local error state"
+        },
+        {
+          "function_name": "rcutils_get_error_string",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current error message string"
+        },
+        {
+          "function_name": "rcutils_reset_error",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "clears the thread-local error state"
+        },
+        {
+          "function_name": "rcutils_get_cwd",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current working directory"
+        },
+        {
+          "function_name": "rcutils_is_directory",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if path is a directory"
+        },
+        {
+          "function_name": "rcutils_is_file",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if path is a regular file"
+        },
+        {
+          "function_name": "rcutils_exists",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if file path exists"
+        },
+        {
+          "function_name": "rcutils_mkdir",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "creates directory at absolute path"
+        },
+        {
+          "function_name": "rcutils_get_file_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns size of file at path"
+        },
+        {
+          "function_name": "rcutils_get_env_var_zero_or_one",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves environment variable as 0, 1, empty, or error"
+        },
+        {
+          "function_name": "rcutils_get_pid",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns current process identifier"
+        },
+        {
+          "function_name": "rcutils_process_wait",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "waits for process termination and retrieves exit code"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_shared_library",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized shared library handle"
+        },
+        {
+          "function_name": "rcutils_load_shared_library",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "loads a shared library and resolves its full path"
+        },
+        {
+          "function_name": "rcutils_get_symbol",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves symbol address from shared library"
+        },
+        {
+          "function_name": "rcutils_has_symbol",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if shared library contains symbol"
+        },
+        {
+          "function_name": "rcutils_get_platform_library_name",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "formats platform-specific shared library filename"
+        },
+        {
+          "function_name": "rcutils_is_shared_library_loaded",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if shared library is loaded"
+        },
+        {
+          "function_name": "rcutils_strerror",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strerror.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current errno message into buffer"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_string_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized string array"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_string_map",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_map.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized string map"
+        },
+        {
+          "function_name": "rcutils_fault_injection_set_count",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets global fault injection counter"
+        },
+        {
+          "function_name": "rcutils_fault_injection_get_count",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current fault injection count"
+        },
+        {
+          "function_name": "rcutils_fault_injection_is_test_complete",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if fault injection testing is complete"
+        },
+        {
+          "function_name": "_rcutils_fault_injection_maybe_fail",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "atomically decrements fault injection counter and returns previous value"
+        },
+        {
+          "function_name": "would_be_negative",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "checks if timespec represents negative time"
+        },
+        {
+          "function_name": "rcutils_system_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current system time"
+        },
+        {
+          "function_name": "rcutils_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns current steady time"
+        },
+        {
+          "function_name": "rcutils_raw_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns current raw steady time"
+        },
+        {
+          "function_name": "rcutils_system_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves current system time in nanoseconds"
+        },
+        {
+          "function_name": "rcutils_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns current steady time in nanoseconds"
+        },
+        {
+          "function_name": "rcutils_raw_steady_time_now",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns current raw steady time"
+        },
+        {
+          "function_name": "rcutils_get_zero_initialized_uint8_array",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "returns zero-initialized uint8 array"
+        },
+        {
+          "function_name": "print_name",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/dummy_shared_library/dummy_shared_library.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "prints function name to stdout"
+        },
+        {
+          "function_name": "main",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_atomics.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "tests atomic operations for standard integer and pointer types"
+        }
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "size": 94,
+      "dominant_purpose": "appends severity name to log output",
+      "dominant_purpose_count": 2,
+      "purpose_counts": {
+        "adds or updates logger severity level in hash map": 2,
+        "appends function name to logging output": 2,
+        "appends log message to output buffer": 2,
+        "appends logger name to output buffer": 2,
+        "appends severity name to log output": 2,
+        "formats time point as nanoseconds string": 2,
+        "formats time point as seconds string": 2,
+        "logs a message with severity and format": 2,
+        "parses logging format string with escape sequences": 2,
+        "retrieves current logging output handler": 2,
+        "appends base file name to log output": 1,
+        "appends file basename to logging output": 1,
+        "appends format substring to output buffer": 1,
+        "appends formatted substring to logging output": 1,
+        "appends formatted timestamp to log output": 1,
+        "appends source file name to log output": 1,
+        "appends source file name to logging output": 1,
+        "appends source line number to log output": 1,
+        "appends source line number to logging output": 1,
+        "checks if logger is enabled for severity": 1,
+        "checks if logger severity is enabled": 1,
+        "converts logging severity string to enum": 1,
+        "dispatches log message to output handler with timestamp": 1,
+        "expands time as nanoseconds string": 1,
+        "expands time as seconds string": 1,
+        "expands timestamp to seconds string": 1,
+        "finds handler for a token": 1,
+        "formats error overwriting warning message": 1,
+        "formats error state overwrite warning message": 1,
+        "formats log message into output buffer": 1,
+        "formats log message using registered handlers": 1,
+        "formats string with length limit using allocator": 1,
+        "formats string with size limit using allocator": 1,
+        "formats string with variadic arguments into buffer": 1,
+        "formats string with variadic arguments safely": 1,
+        "formats time as date string": 1,
+        "formats time as nanoseconds string": 1,
+        "formats time point as ISO 8601 date string with milliseconds": 1,
+        "formats time point as ISO8601 date string with milliseconds": 1,
+        "formats timestamp as date string": 1,
+        "formats timestamp as string and appends to output buffer": 1,
+        "formats varargs string into buffer": 1,
+        "initializes logging allocator": 1,
+        "initializes logging with allocator and environment configuration": 1,
+        "initializes rcutils logging": 1,
+        "initializes rcutils logging with allocator": 1,
+        "initializes rcutils logging with default allocator": 1,
+        "initializes the global logging allocator": 1,
+        "logs formatted message with severity": 1,
+        "logs formatted message with severity check": 1,
+        "outputs formatted log message to console with optional colorization": 1,
+        "outputs formatted log message with timestamp": 1,
+        "parses logging format and creates handlers": 1,
+        "parses logging format string into token handlers": 1,
+        "parses logging severity level from string": 1,
+        "records last log event with formatted message": 1,
+        "records log event with formatted message": 1,
+        "registers a log message format handler": 1,
+        "registers token handler for log formatting": 1,
+        "retrieves default logger level": 1,
+        "retrieves effective severity level for logger": 1,
+        "retrieves handler for token": 1,
+        "retrieves logger level by name": 1,
+        "retrieves logger's effective severity level": 1,
+        "retrieves logger's severity level": 1,
+        "retrieves logging level for named logger": 1,
+        "retrieves logging severity level": 1,
+        "retrieves severity level for named logger": 1,
+        "retrieves severity level from hash map": 1,
+        "returns default logger severity level": 1,
+        "sets current error state": 1,
+        "sets custom logging output handler": 1,
+        "sets default logger level": 1,
+        "sets default logger severity level": 1,
+        "sets global error state with message, file, and line": 1,
+        "sets logger severity level": 1,
+        "sets severity level for a named logger": 1,
+        "sets the global logging output handler": 1,
+        "shuts down rcutils logging and releases resources": 1,
+        "shuts down rcutils logging system": 1,
+        "tests rcutils logging initialization and message capture": 1,
+        "verifies rcutils logging functionality": 1,
+        "writes formatted log message to console": 1,
+        "writes formatted string to buffer": 1
+      },
+      "functions": [
+        {
+          "function_name": "__format_overwriting_error_state_message",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "formats error overwriting warning message"
+        },
+        {
+          "function_name": "rcutils_set_error_state",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "sets current error state"
+        },
+        {
+          "function_name": "rcutils_format_string_limit",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/format_string.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "formats string with size limit using allocator"
+        },
+        {
+          "function_name": "rcutils_logging_initialize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes rcutils logging"
         },
         {
           "function_name": "expand_time",
@@ -1830,6 +2077,12 @@
           "label": "retrieves logger's severity level"
         },
         {
+          "function_name": "add_key_to_hash_map",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "adds or updates logger severity level in hash map"
+        },
+        {
           "function_name": "get_severity_level",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -1890,48 +2143,6 @@
           "label": "writes formatted log message to console"
         },
         {
-          "function_name": "rcutils_get_pid",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns current process identifier"
-        },
-        {
-          "function_name": "rcutils_process_wait",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "waits for process termination and retrieves exit code"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_shared_library",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "returns zero-initialized shared library handle"
-        },
-        {
-          "function_name": "rcutils_get_symbol",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves symbol address from shared library"
-        },
-        {
-          "function_name": "rcutils_has_symbol",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "checks if shared library defines symbol"
-        },
-        {
-          "function_name": "rcutils_get_platform_library_name",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "generates platform-specific library filename"
-        },
-        {
-          "function_name": "rcutils_is_shared_library_loaded",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "checks if shared library is loaded"
-        },
-        {
           "function_name": "rcutils_snprintf",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/snprintf.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -1942,36 +2153,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/snprintf.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "formats varargs string into buffer"
-        },
-        {
-          "function_name": "rcutils_strerror",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strerror.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves error message for current errno"
-        },
-        {
-          "function_name": "rcutils_fault_injection_set_count",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "sets fault injection count"
-        },
-        {
-          "function_name": "rcutils_fault_injection_get_count",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves fault injection count"
-        },
-        {
-          "function_name": "rcutils_fault_injection_is_test_complete",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "determines if fault injection test is complete"
-        },
-        {
-          "function_name": "_rcutils_fault_injection_maybe_fail",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "atomically decrement fault injection counter"
         },
         {
           "function_name": "rcutils_time_point_value_as_nanoseconds_string",
@@ -1992,60 +2173,6 @@
           "label": "formats time point as seconds string"
         },
         {
-          "function_name": "would_be_negative",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "determines if timespec is negative"
-        },
-        {
-          "function_name": "rcutils_system_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current system time"
-        },
-        {
-          "function_name": "rcutils_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current steady time"
-        },
-        {
-          "function_name": "rcutils_raw_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current raw steady time"
-        },
-        {
-          "function_name": "rcutils_system_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current system time in nanoseconds"
-        },
-        {
-          "function_name": "rcutils_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current steady time in nanoseconds"
-        },
-        {
-          "function_name": "rcutils_raw_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "retrieves current steady time"
-        },
-        {
-          "function_name": "print_name",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/dummy_shared_library/dummy_shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "prints name to stdout"
-        },
-        {
-          "function_name": "main",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_atomics.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
-          "label": "verifies support for various atomic types"
-        },
-        {
           "function_name": "custom_handler",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_logging_macros.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
@@ -2056,36 +2183,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_logging_macros.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
           "label": "verifies rcutils logging functionality"
-        },
-        {
-          "function_name": "rcutils_set_env",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets environment variable with overwrite"
-        },
-        {
-          "function_name": "rcutils_set_env_overwrite",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets environment variable with optional overwrite"
-        },
-        {
-          "function_name": "rcutils_get_env",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves environment variable value"
-        },
-        {
-          "function_name": "rcutils_get_home_dir",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/env.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves the user's home directory path"
-        },
-        {
-          "function_name": "rcutils_initialize_error_handling_thread_local_storage",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "initializes thread-local error handling storage"
         },
         {
           "function_name": "__format_overwriting_error_state_message",
@@ -2100,64 +2197,16 @@
           "label": "sets global error state with message, file, and line"
         },
         {
-          "function_name": "rcutils_error_is_set",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
+          "function_name": "rcutils_format_string_limit",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/format_string.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if error state is set"
-        },
-        {
-          "function_name": "rcutils_get_error_state",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current thread-local error state"
-        },
-        {
-          "function_name": "rcutils_get_error_string",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current error message string"
-        },
-        {
-          "function_name": "rcutils_reset_error",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/error_handling.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "clears the thread-local error state"
-        },
-        {
-          "function_name": "rcutils_get_cwd",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current working directory"
-        },
-        {
-          "function_name": "rcutils_is_file",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if path is a regular file"
-        },
-        {
-          "function_name": "rcutils_exists",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if file path exists"
-        },
-        {
-          "function_name": "rcutils_mkdir",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/filesystem.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "creates directory at absolute path"
+          "label": "formats string with length limit using allocator"
         },
         {
           "function_name": "rcutils_logging_initialize",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "initializes rcutils logging with default allocator"
-        },
-        {
-          "function_name": "rcutils_get_env_var_zero_or_one",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves environment variable as 0, 1, empty, or error"
         },
         {
           "function_name": "expand_time",
@@ -2310,6 +2359,12 @@
           "label": "retrieves logging level for named logger"
         },
         {
+          "function_name": "add_key_to_hash_map",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "adds or updates logger severity level in hash map"
+        },
+        {
           "function_name": "get_severity_level",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/logging.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -2370,48 +2425,6 @@
           "label": "outputs formatted log message to console with optional colorization"
         },
         {
-          "function_name": "rcutils_get_pid",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns current process identifier"
-        },
-        {
-          "function_name": "rcutils_process_wait",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "waits for process termination and retrieves exit code"
-        },
-        {
-          "function_name": "rcutils_get_zero_initialized_shared_library",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns zero-initialized shared library handle"
-        },
-        {
-          "function_name": "rcutils_get_symbol",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves symbol address from shared library"
-        },
-        {
-          "function_name": "rcutils_has_symbol",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if shared library contains symbol"
-        },
-        {
-          "function_name": "rcutils_get_platform_library_name",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "formats platform-specific shared library filename"
-        },
-        {
-          "function_name": "rcutils_is_shared_library_loaded",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if shared library is loaded"
-        },
-        {
           "function_name": "rcutils_snprintf",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/snprintf.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -2422,36 +2435,6 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/snprintf.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "formats string with variadic arguments into buffer"
-        },
-        {
-          "function_name": "rcutils_strerror",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/strerror.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current errno message into buffer"
-        },
-        {
-          "function_name": "rcutils_fault_injection_set_count",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "sets global fault injection counter"
-        },
-        {
-          "function_name": "rcutils_fault_injection_get_count",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current fault injection count"
-        },
-        {
-          "function_name": "rcutils_fault_injection_is_test_complete",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if fault injection testing is complete"
-        },
-        {
-          "function_name": "_rcutils_fault_injection_maybe_fail",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/testing/fault_injection.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "atomically decrements fault injection counter and returns previous value"
         },
         {
           "function_name": "rcutils_time_point_value_as_nanoseconds_string",
@@ -2472,60 +2455,6 @@
           "label": "formats time point as seconds string"
         },
         {
-          "function_name": "would_be_negative",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "checks if timespec represents negative time"
-        },
-        {
-          "function_name": "rcutils_system_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current system time"
-        },
-        {
-          "function_name": "rcutils_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns current steady time"
-        },
-        {
-          "function_name": "rcutils_raw_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_unix.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns current raw steady time"
-        },
-        {
-          "function_name": "rcutils_system_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "retrieves current system time in nanoseconds"
-        },
-        {
-          "function_name": "rcutils_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns current steady time in nanoseconds"
-        },
-        {
-          "function_name": "rcutils_raw_steady_time_now",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/time_win32.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "returns current raw steady time"
-        },
-        {
-          "function_name": "print_name",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/dummy_shared_library/dummy_shared_library.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "prints function name to stdout"
-        },
-        {
-          "function_name": "main",
-          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_atomics.c",
-          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
-          "label": "tests atomic operations for standard integer and pointer types"
-        },
-        {
           "function_name": "custom_handler",
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_logging_macros.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
@@ -2536,6 +2465,476 @@
           "file_path": "/Users/pratik/Documents/function-understanding/rcutils/test/test_logging_macros.c",
           "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
           "label": "tests rcutils logging initialization and message capture"
+        }
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "size": 66,
+      "dominant_purpose": "decodes base64 string to byte array",
+      "dominant_purpose_count": 2,
+      "purpose_counts": {
+        "decodes base64 string to byte array": 2,
+        "resizes uint8 array buffer": 2,
+        "adds element to array list": 1,
+        "appends backslash characters to character array": 1,
+        "appends backslashes to char array": 1,
+        "appends element to dynamic array list": 1,
+        "appends string to char array": 1,
+        "appends string to character array": 1,
+        "appends up to n characters to a dynamic character array": 1,
+        "appends up to n characters to char array": 1,
+        "compares two string arrays lexicographically": 1,
+        "computes pointer to element at index": 1,
+        "constructs command line string with proper quoting": 1,
+        "copies element at index to output buffer": 1,
+        "copies memory into char array": 1,
+        "copies source bytes into resizable character array": 1,
+        "copies string into char array": 1,
+        "copies string into character array": 1,
+        "deallocates string array contents and resets state": 1,
+        "deallocates uint8 array buffer": 1,
+        "doubles array list capacity": 1,
+        "encodes byte array as base64 string": 1,
+        "encodes byte array to base64 string": 1,
+        "expands array list capacity": 1,
+        "expands character array buffer to accommodate new size": 1,
+        "expands character array capacity as needed": 1,
+        "finalizes a character array": 1,
+        "finalizes and deallocates array list": 1,
+        "finalizes array list and releases memory": 1,
+        "finalizes character array and releases buffer": 1,
+        "finalizes string array and releases memory": 1,
+        "finalizes uint8 array": 1,
+        "formats and appends formatted string to dynamic character array": 1,
+        "formats string into character array buffer": 1,
+        "initializes a dynamic array list with allocator": 1,
+        "initializes a dynamic character array": 1,
+        "initializes a resizable character array with allocator": 1,
+        "initializes a string array": 1,
+        "initializes array list with given capacity and element size": 1,
+        "initializes string array with allocator": 1,
+        "initializes uint8 array with allocator": 1,
+        "initializes uint8 array with specified capacity": 1,
+        "joins string array into quoted command line": 1,
+        "joins string array using separator": 1,
+        "joins string array with separator": 1,
+        "lexicographically compares two string arrays": 1,
+        "removes element at index from array list": 1,
+        "removes element from array list by index": 1,
+        "resizes character array buffer": 1,
+        "resizes dynamic character array buffer": 1,
+        "resizes string array": 1,
+        "resizes string array to new size": 1,
+        "retrieves array list size": 1,
+        "retrieves element at index from array list": 1,
+        "retrieves pointer to element at given index": 1,
+        "retrieves the number of elements in an array list": 1,
+        "sets array list element at specified index": 1,
+        "sets element at index in array list": 1,
+        "splits string at last delimiter occurrence": 1,
+        "splits string by delimiter into array": 1,
+        "splits string into array by delimiter": 1,
+        "splits string on last delimiter": 1,
+        "writes formatted string into char array": 1,
+        "writes formatted string to char array": 1
+      },
+      "functions": [
+        {
+          "function_name": "rcutils_array_list_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes array list with given capacity and element size"
+        },
+        {
+          "function_name": "rcutils_array_list_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finalizes array list and releases memory"
+        },
+        {
+          "function_name": "rcutils_array_list_increase_capacity",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "expands array list capacity"
+        },
+        {
+          "function_name": "rcutils_array_list_get_pointer_for_index",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves pointer to element at given index"
+        },
+        {
+          "function_name": "rcutils_array_list_add",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "adds element to array list"
+        },
+        {
+          "function_name": "rcutils_array_list_set",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "sets array list element at specified index"
+        },
+        {
+          "function_name": "rcutils_array_list_remove",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "removes element at index from array list"
+        },
+        {
+          "function_name": "rcutils_array_list_get",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "copies element at index to output buffer"
+        },
+        {
+          "function_name": "rcutils_array_list_get_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "retrieves array list size"
+        },
+        {
+          "function_name": "rcutils_decode_base64",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "decodes base64 string to byte array"
+        },
+        {
+          "function_name": "rcutils_encode_base64",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "encodes byte array as base64 string"
+        },
+        {
+          "function_name": "rcutils_char_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes a dynamic character array"
+        },
+        {
+          "function_name": "rcutils_char_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finalizes character array and releases buffer"
+        },
+        {
+          "function_name": "rcutils_char_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "resizes character array buffer"
+        },
+        {
+          "function_name": "rcutils_char_array_expand_as_needed",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "expands character array capacity as needed"
+        },
+        {
+          "function_name": "_rcutils_char_array_vsprintf",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "writes formatted string to char array"
+        },
+        {
+          "function_name": "rcutils_char_array_vsprintf",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "writes formatted string into char array"
+        },
+        {
+          "function_name": "rcutils_char_array_memcpy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "copies memory into char array"
+        },
+        {
+          "function_name": "rcutils_char_array_strcpy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "copies string into char array"
+        },
+        {
+          "function_name": "rcutils_char_array_strncat",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "appends up to n characters to char array"
+        },
+        {
+          "function_name": "rcutils_char_array_strcat",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "appends string to char array"
+        },
+        {
+          "function_name": "rcutils_join",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/join.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "joins string array using separator"
+        },
+        {
+          "function_name": "append_backslashes",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "appends backslashes to char array"
+        },
+        {
+          "function_name": "build_command_line",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "constructs command line string with proper quoting"
+        },
+        {
+          "function_name": "rcutils_split",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "splits string into array by delimiter"
+        },
+        {
+          "function_name": "rcutils_split_last",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "splits string on last delimiter"
+        },
+        {
+          "function_name": "rcutils_string_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes a string array"
+        },
+        {
+          "function_name": "rcutils_string_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finalizes string array and releases memory"
+        },
+        {
+          "function_name": "rcutils_string_array_cmp",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "compares two string arrays lexicographically"
+        },
+        {
+          "function_name": "rcutils_string_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "resizes string array"
+        },
+        {
+          "function_name": "rcutils_uint8_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "initializes uint8 array with specified capacity"
+        },
+        {
+          "function_name": "rcutils_uint8_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "finalizes uint8 array"
+        },
+        {
+          "function_name": "rcutils_uint8_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+          "label": "resizes uint8 array buffer"
+        },
+        {
+          "function_name": "rcutils_array_list_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes a dynamic array list with allocator"
+        },
+        {
+          "function_name": "rcutils_array_list_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "finalizes and deallocates array list"
+        },
+        {
+          "function_name": "rcutils_array_list_increase_capacity",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "doubles array list capacity"
+        },
+        {
+          "function_name": "rcutils_array_list_get_pointer_for_index",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "computes pointer to element at index"
+        },
+        {
+          "function_name": "rcutils_array_list_add",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "appends element to dynamic array list"
+        },
+        {
+          "function_name": "rcutils_array_list_set",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "sets element at index in array list"
+        },
+        {
+          "function_name": "rcutils_array_list_remove",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "removes element from array list by index"
+        },
+        {
+          "function_name": "rcutils_array_list_get",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves element at index from array list"
+        },
+        {
+          "function_name": "rcutils_array_list_get_size",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/array_list.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "retrieves the number of elements in an array list"
+        },
+        {
+          "function_name": "rcutils_decode_base64",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "decodes base64 string to byte array"
+        },
+        {
+          "function_name": "rcutils_encode_base64",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/base64.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "encodes byte array to base64 string"
+        },
+        {
+          "function_name": "rcutils_char_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes a resizable character array with allocator"
+        },
+        {
+          "function_name": "rcutils_char_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "finalizes a character array"
+        },
+        {
+          "function_name": "rcutils_char_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "resizes dynamic character array buffer"
+        },
+        {
+          "function_name": "rcutils_char_array_expand_as_needed",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "expands character array buffer to accommodate new size"
+        },
+        {
+          "function_name": "_rcutils_char_array_vsprintf",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "formats string into character array buffer"
+        },
+        {
+          "function_name": "rcutils_char_array_vsprintf",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "formats and appends formatted string to dynamic character array"
+        },
+        {
+          "function_name": "rcutils_char_array_memcpy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "copies source bytes into resizable character array"
+        },
+        {
+          "function_name": "rcutils_char_array_strcpy",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "copies string into character array"
+        },
+        {
+          "function_name": "rcutils_char_array_strncat",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "appends up to n characters to a dynamic character array"
+        },
+        {
+          "function_name": "rcutils_char_array_strcat",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/char_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "appends string to character array"
+        },
+        {
+          "function_name": "rcutils_join",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/join.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "joins string array with separator"
+        },
+        {
+          "function_name": "append_backslashes",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "appends backslash characters to character array"
+        },
+        {
+          "function_name": "build_command_line",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/process.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "joins string array into quoted command line"
+        },
+        {
+          "function_name": "rcutils_split",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "splits string by delimiter into array"
+        },
+        {
+          "function_name": "rcutils_split_last",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/split.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "splits string at last delimiter occurrence"
+        },
+        {
+          "function_name": "rcutils_string_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes string array with allocator"
+        },
+        {
+          "function_name": "rcutils_string_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "deallocates string array contents and resets state"
+        },
+        {
+          "function_name": "rcutils_string_array_cmp",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "lexicographically compares two string arrays"
+        },
+        {
+          "function_name": "rcutils_string_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/string_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "resizes string array to new size"
+        },
+        {
+          "function_name": "rcutils_uint8_array_init",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "initializes uint8 array with allocator"
+        },
+        {
+          "function_name": "rcutils_uint8_array_fini",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "deallocates uint8 array buffer"
+        },
+        {
+          "function_name": "rcutils_uint8_array_resize",
+          "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/uint8_array.c",
+          "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+          "label": "resizes uint8 array buffer"
         }
       ]
     }

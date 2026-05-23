@@ -16,7 +16,7 @@ from embedding_demo_utils import (
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Write retrieval results for a query function.")
+    parser = argparse.ArgumentParser(description="Retrieve similar functions for a query function.")
     parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--data-dir", type=Path, default=None)
     parser.add_argument("--data-glob", default=DEFAULT_DATA_GLOB)
@@ -41,11 +41,12 @@ def main() -> None:
 
     write_json(args.output_dir / "function_retrieval.json", retrieval_payload(query_record, neighbors))
 
-    print("RETRIEVAL")
+    print("RETRIEVAL BY QUERY FUNCTION")
     print(f"query function: {query_record.function_name}")
-    print("returned neighbors:")
+    print(f"query purpose: {query_record.label or 'n/a'}")
+    print("nearest neighbors:")
     for rank, (score, record) in enumerate(neighbors, start=1):
-        print(f"{rank}. {record.function_name} ({score:.4f})")
+        print(f"{rank}. {record.function_name} ({score:.4f}) - {record.label or 'n/a'}")
 
 
 if __name__ == "__main__":

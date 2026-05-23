@@ -21,6 +21,20 @@
       "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
       "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
       "label": "allocates zero-initialized memory"
+    },
+    {
+      "score": 0.8543508582592985,
+      "function_name": "__default_reallocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+      "label": "reallocates memory block"
+    },
+    {
+      "score": 0.8543508582592985,
+      "function_name": "__default_reallocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+      "label": "reallocates memory using standard realloc"
     }
   ]
 }

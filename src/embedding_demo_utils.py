@@ -181,6 +181,9 @@ def similarity_payload(query_record: EmbeddedFunction, results: list[tuple[float
 def retrieval_payload(query_record: EmbeddedFunction, results: list[tuple[float, EmbeddedFunction]]) -> dict:
     return {
         "query_function": query_record.function_name,
+        "query_file_path": query_record.file_path,
+        "query_source_file": query_record.source_file,
+        "query_label": query_record.label,
         "neighbors": [
             {
                 "score": score,
