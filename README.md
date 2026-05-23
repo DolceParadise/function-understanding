@@ -4,6 +4,30 @@ This project turns C source code into function-level semantic artifacts. It pars
 
 The current demo is built around the `rcutils` repository, which is already checked in as a submodule-style C codebase under this workspace. I chose it because it contains roughly 30 C source files, which was enough structure to demonstrate extraction, embedding, clustering, and retrieval without making the project feel toy-sized. You can point the same pipeline at another C Git repository by adding it as a submodule under `rcutils/` and re-running the scripts below.
 
+## Repository Overview
+
+```text
+function-understanding/
+├── README.md : Project guide, setup steps, demo commands, and evaluation notes. You're reading this rn :))
+├── src/
+│   ├── extract_function_datapoints.py - Parses C files and extracts per-function datapoints with purpose labels.
+│   ├── generate_function_embeddings.py - Converts extracted datapoints into embedding JSONL files.
+│   ├── clustering_demo.py - Groups embedded functions by semantic purpose.
+│   ├── retrieval_demo.py - Retrieves similar functions for a chosen query function.
+│   ├── evaluate_embeddings.py - Computes retrieval metrics and clustering sanity checks.
+│   └── embedding_demo_utils.py - Shared helpers for loading, similarity, clustering, and payload formatting.
+├── data/
+│   └── Generated embeddings, demo outputs, and evaluation reports.
+├── rcutils/
+│   └── Current C source used as the extraction baseline; can be changed to any other repo
+├── docs/
+│   ├── EMBEDDING_MODEL.md - answer to why did I chose the jina embedding model
+│   └── LABEL.md - answer to why I chose the current label extraction method
+└── config/
+│   ├── label_rules.json - Dictionary with AST labelling features and side effect patterns
+│   └── system_prompt.txt - LLM System prompt for generating high_level_purpose label
+```
+
 ## Using A C Repository
 
 To swap in another C repository, add it under `rcutils/` as a Git submodule and treat that directory as the source root for extraction. The rest of the pipeline stays the same: the extractor walks the C files, the embedding step consumes the generated JSONL, and the demo/evaluation scripts operate on the saved outputs in `data/`.
