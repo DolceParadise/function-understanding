@@ -18,13 +18,13 @@ from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from typing import Iterable, Iterator
-
-from llm import Rits
+from tqdm import tqdm
+from openRouter import OpenRouter
 
 
 SYSTEM_PROMPT_PATH = Path(__file__).resolve().parents[1] / "configs" / "system_prompt.txt"
 LABEL_RULES_PATH = Path(__file__).resolve().parents[1] / "configs" / "label_rules.json"
-DEFAULT_LLM_MODEL = os.environ.get("RITS_MODEL", "moonshotai/Kimi-K2.5")
+DEFAULT_LLM_MODEL = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-120b:free")
 
 
 @dataclass(frozen=True)
@@ -246,7 +246,9 @@ def build_ast_features(function_node, ast_config: AstFeatureConfig | None = None
 
 def infer_high_level_purpose(function_name: str, function_code: str) -> str:
     raw_purpose = query_high_level_purpose(function_name, function_code)
-    return normalize_high_level_purpose(raw_purpose)
+    purpose = normalize_high_level_purpose(raw_purpose)
+    print (purpose)
+    return purpose
 
 
 def load_system_prompt() -> str:
@@ -254,8 +256,8 @@ def load_system_prompt() -> str:
 
 
 @lru_cache(maxsize=1)
-def get_llm_client() -> Rits:
-    return Rits(model=DEFAULT_LLM_MODEL)
+def get_llm_client() -> OpenRouter:
+    return OpenRouter(model=DEFAULT_LLM_MODEL)
 
 
 def build_user_prompt(function_name: str, function_code: str) -> str:
@@ -445,7 +447,7 @@ def main() -> None:
     output_path = args.output
 
     all_records: list[FunctionRecord] = []
-    for file_path in iter_c_files(source_root):
+    for file_path in tqdm(list(iter_c_files(source_root)), desc="Extracting functions"):
         all_records.extend(extract_function_records(file_path))
 
     write_jsonl(all_records, output_path)

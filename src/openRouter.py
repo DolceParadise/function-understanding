@@ -31,7 +31,7 @@ except ImportError:
 load_dotenv(dotenv_path=Path(__file__).with_name(".env"), override=False)
 load_dotenv()
 
-DEFAULT_MODEL = os.environ.get("OPENROUTER_MODEL", "qwen/qwen3-coder:free")
+DEFAULT_MODEL = os.environ.get("OPENROUTER_MODEL", "openai/gpt-oss-120b:free")
 DEFAULT_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
 
 
@@ -87,7 +87,7 @@ class OpenRouter(OpenAI):
 
 
 if __name__ == "__main__":
-    client = OpenRouter(model="qwen/qwen3-coder:free")
+    client = OpenRouter(model="openai/gpt-oss-120b:free")
     system_prompt_path = Path(__file__).parent.parent.joinpath("configs").joinpath("system_prompt.txt")
     input = system_prompt_path.read_text(encoding="utf-8")
     prompt = "Generate a big number widget that shows the sum total latency for catalogue service."
