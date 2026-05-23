@@ -1,0 +1,31 @@
+{
+  "query": {
+    "function_name": "__default_allocate",
+    "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+    "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+    "label": "allocates memory with malloc"
+  },
+  "results": [
+    {
+      "score": 1.0,
+      "function_name": "__default_allocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+      "label": "allocates memory using malloc"
+    },
+    {
+      "score": 0.8834878296552471,
+      "function_name": "__default_zero_allocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+      "label": "allocates zero-initialized memory"
+    },
+    {
+      "score": 0.8834878296552471,
+      "function_name": "__default_zero_allocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+      "label": "allocates zero-initialized memory"
+    }
+  ]
+}
