@@ -108,14 +108,8 @@ class Rits(OpenAI):
 if __name__ == "__main__":
     # Example usage
     client = Rits(model='moonshotai/Kimi-K2.5')
-    input = """SYSTEM: You are a helpful assistant and your task is to find all the necessary slot arguments and their values from the input text. Please do not add anything after slot 4:
-    Slot-1: what is the widget being created? Allowed values ("timeseries","Big number", "Pie Chart")
-    Slot-2: what are the metric names ? Allowed values (Calls, Erroneous Calls (Count), Erroneous Calls (rate), Latency, number of)
-    Slot-3:"Aggregation type for the metric. Allowed Values ("min", "max","Sum","Mean","Mod", "Median", "25th Percentile","50th percentile", 75th percentile, 90th percentile, 95th percentile, 98th percentile, 99th percentile, "per second", "per minute", "per hour")
-    Slot-4:"what is the service name?"
-    USER: {}".
-    ASSISTANT: 
-    """
+    system_prompt_path = Path(__file__).parent.parent.joinpath("configs").joinpath("system_prompt.txt")
+    input = system_prompt_path.read_text(encoding="utf-8")
     prompt = "Generate a big number widget that shows the sum total latency for catalogue service."
     llm_input = input.format(prompt)
     generated_text = client.generate_text(llm_input, max_tokens=1024)

@@ -2,10 +2,10 @@
 
 """Extract function-level datapoints from rcutils C sources.
 
-The script uses ctags to enumerate function definitions, then uses a small
-brace-aware scanner to recover the full function body from the source file.
-For each extracted function it emits a JSONL datapoint with lightweight labels
-derived from the code body.
+The script uses tree-sitter to parse C sources, recover function definitions,
+and derive AST-based features for each function. For each extracted function it
+emits a JSONL datapoint with lightweight labels derived from the code body and
+an LLM-backed high-level purpose label.
 """
 
 from __future__ import annotations
@@ -13,8 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
-import subprocess
+from collections import Counter
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
@@ -23,7 +22,6 @@ from typing import Iterable, Iterator
 from llm import Rits
 
 
-CONTROL_FLOW_KEYWORDS = ("if", "for", "while", "return")
 SYSTEM_PROMPT_PATH = Path(__file__).resolve().parents[1] / "configs" / "system_prompt.txt"
 LABEL_RULES_PATH = Path(__file__).resolve().parents[1] / "configs" / "label_rules.json"
 DEFAULT_LLM_MODEL = os.environ.get("RITS_MODEL", "moonshotai/Kimi-K2.5")
@@ -34,7 +32,17 @@ class FunctionRecord:
     function_name: str
     function_code: str
     file_path: str
+    ast_features: dict
     labels: dict
+
+
+@dataclass(frozen=True)
+class AstFeatureConfig:
+    control_flow_elements: tuple[str, ...]
+    statement_distribution_labels: tuple[str, ...]
+    statement_node_labels: dict[str, str]
+    control_flow_node_labels: dict[str, str]
+    cyclomatic_complexity_node_types: tuple[str, ...]
 
 
 def parse_args() -> argparse.Namespace:
@@ -50,16 +58,22 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--source-root",
         type=Path,
-        default=Path(__file__).resolve().parents[1] / "rcutils",
+        default=None,
         help="Directory to scan for C files.",
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path(__file__).resolve().parents[1] / "data" / "rcutils_function_datapoints.jsonl",
+        default=None,
         help="JSONL output path.",
     )
-    return parser.parse_args()
+
+    args = parser.parse_args()
+    if args.source_root is None:
+        args.source_root = args.repo_root / "rcutils"
+    if args.output is None:
+        args.output = args.repo_root / "data" / "rcutils_function_datapoints.jsonl"
+    return args
 
 
 def iter_c_files(source_root: Path) -> Iterator[Path]:
@@ -68,164 +82,175 @@ def iter_c_files(source_root: Path) -> Iterator[Path]:
             yield path
 
 
-def run_ctags(file_path: Path) -> list[tuple[str, int, str]]:
-    completed = subprocess.run(
-        ["ctags", "-x", str(file_path)],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    entries: list[tuple[str, int, str]] = []
-    for raw_line in completed.stdout.splitlines():
-        match = re.match(r"^(\S+)\s+(\d+)\s+(\S+)\s+(.*)$", raw_line)
-        if not match:
-            continue
-        name, line_number, _source_path, signature = match.groups()
-        entries.append((name, int(line_number), signature))
-    return entries
+@lru_cache(maxsize=1)
+def get_c_parser():
+    from tree_sitter import Parser
+
+    parser = Parser()
+    parser.language = load_c_language()
+    return parser
 
 
-def build_line_offsets(text: str) -> list[int]:
-    offsets = [0]
-    for match in re.finditer(r"\n", text):
-        offsets.append(match.end())
-    return offsets
+@lru_cache(maxsize=1)
+def load_c_language():
+    from tree_sitter import Language
+    import tree_sitter_c
+
+    return Language(tree_sitter_c.language())
 
 
-def line_start_offset(line_offsets: list[int], line_number: int) -> int:
-    return line_offsets[max(0, line_number - 1)]
+def parse_c_source(file_path: Path):
+    source_bytes = file_path.read_bytes()
+    tree = get_c_parser().parse(source_bytes)
+    return source_bytes, tree
 
 
-def offset_to_line_number(line_offsets: list[int], offset: int) -> int:
-    # line_offsets stores the start offset for each line (1-based line index).
-    low = 0
-    high = len(line_offsets) - 1
-    while low <= high:
-        mid = (low + high) // 2
-        if line_offsets[mid] <= offset:
-            low = mid + 1
-        else:
-            high = mid - 1
-    return high + 1
+def iter_named_descendants(node):
+    for child in node.named_children:
+        yield child
+        yield from iter_named_descendants(child)
 
 
-def find_function_body(text: str, start_offset: int) -> tuple[int, int]:
-    in_block_comment = False
-    in_line_comment = False
-    in_string = False
-    in_char = False
-    escape = False
-    brace_depth = 0
-    body_open = -1
-
-    index = start_offset
-    while index < len(text):
-        char = text[index]
-        next_char = text[index + 1] if index + 1 < len(text) else ""
-
-        if in_line_comment:
-            if char == "\n":
-                in_line_comment = False
-            index += 1
-            continue
-
-        if in_block_comment:
-            if char == "*" and next_char == "/":
-                in_block_comment = False
-                index += 2
-                continue
-            index += 1
-            continue
-
-        if in_string:
-            if escape:
-                escape = False
-            elif char == "\\":
-                escape = True
-            elif char == '"':
-                in_string = False
-            index += 1
-            continue
-
-        if in_char:
-            if escape:
-                escape = False
-            elif char == "\\":
-                escape = True
-            elif char == "'":
-                in_char = False
-            index += 1
-            continue
-
-        if char == "/" and next_char == "/":
-            in_line_comment = True
-            index += 2
-            continue
-        if char == "/" and next_char == "*":
-            in_block_comment = True
-            index += 2
-            continue
-        if char == '"':
-            in_string = True
-            index += 1
-            continue
-        if char == "'":
-            in_char = True
-            index += 1
-            continue
-
-        if char == "{":
-            brace_depth += 1
-            if body_open < 0:
-                body_open = index
-        elif char == "}":
-            brace_depth -= 1
-            if brace_depth == 0 and body_open >= 0:
-                return body_open, index + 1
-
-        index += 1
-
-    raise ValueError("unbalanced braces while extracting function body")
+def iter_function_definition_nodes(node):
+    for child in node.named_children:
+        if child.type == "function_definition":
+            yield child
+        yield from iter_function_definition_nodes(child)
 
 
-def find_signature_start_line(lines: list[str], body_open_line: int, function_name_line: int) -> int:
-    start_line = function_name_line
-    current = function_name_line - 1
-
-    while current >= 1:
-        stripped = lines[current - 1].strip()
-        if not stripped:
-            break
-        if stripped.startswith("#"):
-            break
-        if stripped.endswith(";") or stripped.endswith("}"):
-            break
-        start_line = current
-        current -= 1
-
-    # If the opening brace is on the same line as the signature, ensure the
-    # extracted slice still begins at the earliest signature line.
-    if body_open_line < start_line:
-        return body_open_line
-    return start_line
+def first_descendant_of_type(node, node_type: str):
+    if node.type == node_type:
+        return node
+    for child in node.named_children:
+        match = first_descendant_of_type(child, node_type)
+        if match is not None:
+            return match
+    return None
 
 
-def infer_high_level_purpose(function_name: str, function_code: str) -> str:
-    raw_purpose = query_high_level_purpose(function_name, function_code)
-    purpose = normalize_high_level_purpose(raw_purpose)
-    if purpose:
-        return purpose
-    
-    return fallback_high_level_purpose(function_name, function_code)
+def get_function_body_node(function_node):
+    body_node = function_node.child_by_field_name("body")
+    if body_node is not None:
+        return body_node
+    for child in reversed(function_node.named_children):
+        if child.type == "compound_statement":
+            return child
+    raise ValueError("function definition is missing a body")
 
 
-def load_system_prompt() -> str:
-    return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8").strip()
+def get_function_name(function_node, source_bytes: bytes) -> str:
+    declarator = function_node.child_by_field_name("declarator")
+    if declarator is None:
+        declarator = first_descendant_of_type(function_node, "function_declarator")
+    if declarator is None:
+        raise ValueError("function definition is missing a declarator")
+
+    identifier = first_descendant_of_type(declarator, "identifier")
+    if identifier is None:
+        raise ValueError("function definition is missing an identifier")
+    return source_bytes[identifier.start_byte : identifier.end_byte].decode("utf-8")
+
+
+def compute_ast_depth(node) -> int:
+    child_depths = [compute_ast_depth(child) for child in node.named_children]
+    if not child_depths:
+        return 1
+    return 1 + max(child_depths)
 
 
 @lru_cache(maxsize=1)
 def load_label_rules() -> dict:
     return json.loads(LABEL_RULES_PATH.read_text(encoding="utf-8"))
+
+
+@lru_cache(maxsize=1)
+def load_ast_feature_config() -> AstFeatureConfig:
+    raw_config = load_label_rules().get("ast_features", {})
+    return AstFeatureConfig(
+        control_flow_elements=tuple(raw_config.get("control_flow_elements", ())),
+        statement_distribution_labels=tuple(raw_config.get("statement_distribution_labels", ())),
+        statement_node_labels=dict(raw_config.get("statement_node_labels", {})),
+        control_flow_node_labels=dict(raw_config.get("control_flow_node_labels", {})),
+        cyclomatic_complexity_node_types=tuple(raw_config.get("cyclomatic_complexity_node_types", ())),
+    )
+
+
+def count_labeled_descendants(
+    root_node,
+    label_map: dict[str, str],
+    ordered_labels: tuple[str, ...],
+    include_zero_values: bool = False,
+) -> dict[str, int]:
+    counts: Counter[str] = Counter()
+    for descendant in iter_named_descendants(root_node):
+        label = label_map.get(descendant.type)
+        if label is not None:
+            counts[label] += 1
+
+    if include_zero_values:
+        return {label: counts.get(label, 0) for label in ordered_labels}
+    return {label: counts[label] for label in ordered_labels if counts[label] > 0}
+
+
+def count_statement_distribution(body_node, ast_config: AstFeatureConfig | None = None) -> dict[str, int]:
+    ast_config = ast_config or load_ast_feature_config()
+    return count_labeled_descendants(
+        body_node,
+        ast_config.statement_node_labels,
+        ast_config.statement_distribution_labels,
+    )
+
+
+def count_control_flow_elements(body_node, ast_config: AstFeatureConfig | None = None) -> dict[str, int]:
+    ast_config = ast_config or load_ast_feature_config()
+    return count_labeled_descendants(
+        body_node,
+        ast_config.control_flow_node_labels,
+        ast_config.control_flow_elements,
+        include_zero_values=True,
+    )
+
+
+def count_pointer_dereferences(body_node) -> int:
+    total = 0
+    for descendant in iter_named_descendants(body_node):
+        if descendant.type != "unary_expression":
+            continue
+        if any(child.type == "*" for child in descendant.children):
+            total += 1
+    return total
+
+
+def count_cyclomatic_complexity(body_node, ast_config: AstFeatureConfig | None = None) -> int:
+    ast_config = ast_config or load_ast_feature_config()
+    complexity = 1
+    for descendant in iter_named_descendants(body_node):
+        if descendant.type in ast_config.cyclomatic_complexity_node_types:
+            complexity += 1
+            continue
+        if descendant.type == "binary_expression":
+            complexity += sum(1 for child in descendant.children if child.type in {"&&", "||"})
+    return complexity
+
+
+def build_ast_features(function_node, ast_config: AstFeatureConfig | None = None) -> dict:
+    ast_config = ast_config or load_ast_feature_config()
+    body_node = get_function_body_node(function_node)
+    return {
+        "ast_depth": compute_ast_depth(function_node),
+        "cyclomatic_complexity": count_cyclomatic_complexity(body_node, ast_config),
+        "statement_distribution": count_statement_distribution(body_node, ast_config),
+        "pointer_dereferences": count_pointer_dereferences(body_node),
+    }
+
+
+def infer_high_level_purpose(function_name: str, function_code: str) -> str:
+    raw_purpose = query_high_level_purpose(function_name, function_code)
+    return normalize_high_level_purpose(raw_purpose)
+
+
+def load_system_prompt() -> str:
+    return SYSTEM_PROMPT_PATH.read_text(encoding="utf-8").strip()
 
 
 @lru_cache(maxsize=1)
@@ -253,7 +278,7 @@ def build_llm_prompt(function_name: str, function_code: str) -> str:
 
 def query_high_level_purpose(function_name: str, function_code: str) -> str:
     prompt = build_llm_prompt(function_name, function_code)
-    return get_llm_client().generate_text(prompt, max_tokens=64)
+    return (get_llm_client().generate_text(prompt, max_tokens=64))
 
 
 def normalize_high_level_purpose(raw_purpose: str) -> str:
@@ -262,6 +287,10 @@ def normalize_high_level_purpose(raw_purpose: str) -> str:
         return ""
     if purpose.startswith("Error:"):
         return ""
+    if purpose.startswith("```"):
+        lines = purpose.splitlines()
+        if len(lines) >= 3:
+            purpose = "\n".join(lines[1:-1]).strip()
     if purpose.startswith("{") and purpose.endswith("}"):
         try:
             payload = json.loads(purpose)
@@ -271,22 +300,16 @@ def normalize_high_level_purpose(raw_purpose: str) -> str:
             json_value = payload.get("high_level_purpose")
             if isinstance(json_value, str) and json_value.strip():
                 purpose = json_value.strip()
-    quoted_matches = re.findall(r'"([^"]{3,200})"|\'([^\']{3,200})\'', purpose)
-    if quoted_matches:
-        for double_quoted, single_quoted in reversed(quoted_matches):
-            candidate = double_quoted or single_quoted
-            if candidate.strip():
-                purpose = candidate.strip()
-                break
-    lower_purpose = purpose.lower()
+    purpose = purpose.strip().strip('"\'`')
+    purpose = purpose.replace("high_level_purpose:", "")
+    purpose = purpose.replace("High_level_purpose:", "")
     for marker in ("high_level_purpose:", "purpose:", "phrase:", "answer:", "label:"):
-        marker_index = lower_purpose.rfind(marker)
+        marker_index = purpose.lower().rfind(marker)
         if marker_index != -1:
             purpose = purpose[marker_index + len(marker) :].strip()
-            lower_purpose = purpose.lower()
-    purpose = purpose.removeprefix("Purpose:").removeprefix("purpose:").strip()
-    purpose = purpose.strip('"\'`')
-    purpose = re.sub(r"\s+", " ", purpose)
+    lines = [line.strip() for line in purpose.splitlines() if line.strip()]
+    if lines:
+        purpose = lines[-1]
     if len(purpose.split()) > 12 and "." in purpose:
         tail = purpose.rsplit(".", 1)[-1].strip()
         if 3 <= len(tail.split()) <= 12:
@@ -305,100 +328,75 @@ def is_concise_purpose(purpose: str) -> bool:
         return False
     if any(ch in purpose for ch in (".", ":", "?", "!", "=", "/", "\\")):
         return False
-    if re.search(r"\b(static|return|void|size_t|const|struct|while|typedef|include)\b", purpose, re.IGNORECASE):
+    words = {word.strip('"\'`.,').lower() for word in purpose.split()}
+    if words.intersection({"static", "return", "void", "size_t", "const", "struct", "while", "typedef", "include"}):
         return False
     word_count = len(purpose.split())
-    if word_count < 3 or word_count > 12:
-        return False
-    return True
-
-
-def fallback_high_level_purpose(function_name: str, function_code: str) -> str:
-    lowered_name = function_name.lower()
-    compact_name = lowered_name.removeprefix("rcutils_").removeprefix("__")
-    compact_name = compact_name.replace("__", "_")
-    code = function_code.lower()
-    rules = load_label_rules()
-
-    matched = match_rule(compact_name, rules.get("purpose_rules", []))
-    if matched:
-        return matched
-
-    side_effects = detect_side_effects(code)
-    if side_effects:
-        signal_text = ", ".join(side_effects)
-        return f"handles {signal_text} concerns for {compact_name.replace('_', ' ')}"
-
-    return build_fallback_purpose(compact_name, rules.get("purpose_fallback_verbs", {}))
-
-
-def match_rule(compact_name: str, rules: list[dict]) -> str:
-    for rule in rules:
-        if rule_matches(compact_name, rule):
-            return rule["purpose"]
-    return ""
-
-
-def rule_matches(compact_name: str, rule: dict) -> bool:
-    tokens = compact_name.split("_") if compact_name else []
-    required = rule.get("all", [])
-    optional = rule.get("any", [])
-    if required and not all(any(fragment in token or fragment in compact_name for token in tokens) for fragment in required):
-        return False
-    if optional and not any(any(fragment in token or fragment in compact_name for token in tokens) for fragment in optional):
+    if word_count < 2 or word_count > 12:
         return False
     return True
 
 
 def detect_side_effects(code: str) -> list[str]:
-    rules = load_label_rules().get("side_effect_patterns", {})
-    labels = [label for label, patterns in rules.items() if any(re.search(pattern, code) for pattern in patterns)]
+    code_lower = code.lower()
+    rules = load_side_effect_patterns()
+    labels = []
+    for label, patterns in rules.items():
+        if any(identifier_occurs(code_lower, pattern) for pattern in patterns):
+            labels.append(label)
     return labels
 
 
-def build_fallback_purpose(compact_name: str, verb_map: dict[str, str]) -> str:
-    tokens = compact_name.split("_") if compact_name else [compact_name]
-    verb = tokens[0] if tokens else compact_name
-    remainder = " ".join(tokens[1:]).strip()
-    if verb in verb_map:
-        return f"{verb_map[verb]} {remainder}".strip()
-    return f"operates on {compact_name.replace('_', ' ').strip()}".strip()
+@lru_cache(maxsize=1)
+def load_side_effect_patterns() -> dict[str, list[str]]:
+    raw_patterns = load_label_rules().get("side_effect_patterns", {})
+    normalized: dict[str, list[str]] = {}
+    for label, patterns in raw_patterns.items():
+        normalized[label] = [pattern.strip().lower() for pattern in patterns if pattern.strip()]
+    return normalized
 
 
-def infer_control_flow_elements(function_code: str) -> list[str]:
-    elements = [kw for kw in CONTROL_FLOW_KEYWORDS if re.search(rf"\b{kw}\b", function_code)]
-    return elements
+def identifier_occurs(text: str, needle: str) -> bool:
+    start = 0
+    while True:
+        index = text.find(needle, start)
+        if index < 0:
+            return False
+        before = text[index - 1] if index > 0 else ""
+        after_index = index + len(needle)
+        after = text[after_index] if after_index < len(text) else ""
+        if not is_identifier_char(before) and not is_identifier_char(after):
+            return True
+        start = index + 1
 
 
-def infer_side_effects(function_code: str) -> list[str]:
-    labels = detect_side_effects(function_code)
-    return labels if labels else ["none"]
+def is_identifier_char(character: str) -> bool:
+    return character.isalnum() or character == "_"
 
 
 def extract_function_records(file_path: Path) -> list[FunctionRecord]:
-    text = file_path.read_text(encoding="utf-8")
-    lines = text.splitlines(keepends=True)
-    line_offsets = build_line_offsets(text)
+    source_bytes, tree = parse_c_source(file_path)
+    source_text = source_bytes.decode("utf-8")
+    ast_config = load_ast_feature_config()
 
     records: list[FunctionRecord] = []
-    for function_name, definition_line, _signature in run_ctags(file_path):
-        start_offset = line_start_offset(line_offsets, definition_line)
-        body_open_offset, body_close_offset = find_function_body(text, start_offset)
-        body_open_line = offset_to_line_number(line_offsets, body_open_offset)
-        body_close_line = offset_to_line_number(line_offsets, body_close_offset)
-        start_line = find_signature_start_line(lines, body_open_line, definition_line)
-        function_code = "".join(lines[start_line - 1 : body_close_line])
+    for function_node in iter_function_definition_nodes(tree.root_node):
+        function_name = get_function_name(function_node, source_bytes)
+        function_code = source_text[function_node.start_byte : function_node.end_byte]
+        ast_features = build_ast_features(function_node, ast_config)
+        body_node = get_function_body_node(function_node)
 
         labels = {
             "high_level_purpose": infer_high_level_purpose(function_name, function_code),
-            "control_flow_elements": infer_control_flow_elements(function_code),
-            "side_effects": infer_side_effects(function_code),
+            "control_flow_elements": count_control_flow_elements(body_node, ast_config),
+            "side_effects": detect_side_effects(function_code),
         }
         records.append(
             FunctionRecord(
                 function_name=function_name,
                 function_code=function_code,
                 file_path=str(file_path),
+                ast_features=ast_features,
                 labels=labels,
             )
         )
@@ -406,15 +404,24 @@ def extract_function_records(file_path: Path) -> list[FunctionRecord]:
 
 
 def validate_record(record: FunctionRecord) -> None:
+    ast_config = load_ast_feature_config()
     if not record.function_name:
         raise ValueError("missing function_name")
     if not record.function_code.strip():
         raise ValueError(f"empty function_code for {record.function_name}")
-    if record.labels["side_effects"] == []:
-        raise ValueError(f"missing side_effects for {record.function_name}")
-    for element in record.labels["control_flow_elements"]:
-        if element not in CONTROL_FLOW_KEYWORDS:
-            raise ValueError(f"unexpected control flow label {element!r}")
+    ast_features = record.ast_features
+    required_ast_keys = {"ast_depth", "cyclomatic_complexity", "statement_distribution", "pointer_dereferences"}
+    if set(ast_features) != required_ast_keys:
+        raise ValueError(f"unexpected ast_features keys for {record.function_name}")
+    if not isinstance(ast_features["statement_distribution"], dict):
+        raise ValueError(f"invalid statement_distribution for {record.function_name}")
+    if not isinstance(record.labels.get("control_flow_elements"), dict):
+        raise ValueError(f"invalid control_flow_elements for {record.function_name}")
+    control_flow_elements = record.labels["control_flow_elements"]
+    if set(control_flow_elements) != set(ast_config.control_flow_elements):
+        raise ValueError(f"unexpected control flow keys for {record.function_name}")
+    if not isinstance(record.labels.get("side_effects"), list):
+        raise ValueError(f"invalid side_effects for {record.function_name}")
 
 
 def write_jsonl(records: Iterable[FunctionRecord], output_path: Path) -> None:
@@ -426,6 +433,7 @@ def write_jsonl(records: Iterable[FunctionRecord], output_path: Path) -> None:
                 "function_name": record.function_name,
                 "function_code": record.function_code,
                 "file_path": record.file_path,
+                "ast_features": record.ast_features,
                 "labels": record.labels,
             }
             handle.write(json.dumps(payload, ensure_ascii=True) + "\n")
