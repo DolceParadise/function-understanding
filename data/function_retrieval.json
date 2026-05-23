@@ -1,5 +1,8 @@
 {
   "query_function": "__default_allocate",
+  "query_file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+  "query_source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+  "query_label": "allocates memory with malloc",
   "neighbors": [
     {
       "score": 1.0,
@@ -35,6 +38,41 @@
       "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
       "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
       "label": "reallocates memory using standard realloc"
+    },
+    {
+      "score": 0.8445208072916709,
+      "function_name": "rcutils_get_default_allocator",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+      "label": "provides default memory allocator"
+    },
+    {
+      "score": 0.8445208072916709,
+      "function_name": "rcutils_get_default_allocator",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+      "label": "returns default memory allocator"
+    },
+    {
+      "score": 0.8083232136410708,
+      "function_name": "__default_deallocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+      "label": "frees allocated memory"
+    },
+    {
+      "score": 0.8083232136410708,
+      "function_name": "__default_deallocate",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_kimi_embeddings.jsonl",
+      "label": "deallocates memory using standard free"
+    },
+    {
+      "score": 0.7683381452534512,
+      "function_name": "rcutils_get_zero_initialized_allocator",
+      "file_path": "/Users/pratik/Documents/function-understanding/rcutils/src/allocator.c",
+      "source_file": "/Users/pratik/Documents/function-understanding/data/rcutils_function_datapoints_gpt120b_embeddings.jsonl",
+      "label": "provides a zero-initialized allocator"
     }
   ]
 }
