@@ -9,6 +9,7 @@ The current demo is built around the `rcutils` repository, which is already chec
 ```text
 function-understanding/
 ├── README.md : Project guide, setup steps, demo commands, and evaluation notes. You're reading this rn :))
+├── app.py : Entrypoint into the lightweight UI for clustering and search demos
 ├── src/
 │   ├── extract_function_datapoints.py - Parses C files and extracts per-function datapoints with purpose labels.
 │   ├── generate_function_embeddings.py - Converts extracted datapoints into embedding JSONL files.
@@ -26,6 +27,7 @@ function-understanding/
 └── config/
     ├── label_rules.json - Dictionary with AST labelling features and side effect patterns
     └── system_prompt.txt - LLM System prompt for generating high_level_purpose label
+    └── function_semantics_lab.html - Web template for UI that does clustering visualization & search
 ```
 
 ## Using A C Repository
