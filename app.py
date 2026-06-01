@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import os
 import json
 import re
 import sys
@@ -303,13 +303,13 @@ class AppHandler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
-    port = 8000
+    port = int(os.environ.get("PORT", 8000))
     if len(sys.argv) > 1:
         try:
             port = int(sys.argv[1])
         except ValueError:
             pass
-    server = ThreadingHTTPServer(("127.0.0.1", port), AppHandler)
+    server = ThreadingHTTPServer(("0.0.0.0", port), AppHandler)
     print(f"Function Semantics Lab running at http://127.0.0.1:{port}")
     try:
         server.serve_forever()
