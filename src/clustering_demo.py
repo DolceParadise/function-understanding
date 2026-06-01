@@ -8,6 +8,7 @@ from pathlib import Path
 
 from embedding_demo_utils import (
     DEFAULT_DATA_GLOB,
+    EmbeddedFunction,
     kmeans_cluster,
     load_embedded_functions,
     write_json,
@@ -32,13 +33,20 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
-def main() -> None:
-    args = parse_args()
-    records = load_embedded_functions(args.data_dir, args.data_glob)
-    assignments = kmeans_cluster(records, args.clusters, args.max_iterations, args.seed)
-    cluster_count = min(args.clusters, len(set(assignments)))
+def build_clustering_result(
+    repo_root: Path,
+    data_dir: Path | None,
+    data_glob: str,
+    clusters: int,
+    max_iterations: int,
+    seed: int,
+) -> dict:
+    resolved_data_dir = data_dir or (repo_root / "data")
+    records = load_embedded_functions(resolved_data_dir, data_glob)
+    assignments = kmeans_cluster(records, clusters, max_iterations, seed)
+    cluster_count = min(clusters, len(set(assignments)))
 
-    clusters = []
+    cluster_payloads = []
     for cluster_index in range(cluster_count):
         members = [record for record, assignment in zip(records, assignments) if assignment == cluster_index]
         label_counts = Counter(record.label or "unlabeled" for record in members)
@@ -46,7 +54,7 @@ def main() -> None:
         if label_counts:
             dominant_label, dominant_count = label_counts.most_common(1)[0]
 
-        clusters.append(
+        cluster_payloads.append(
             {
                 "cluster_id": cluster_index,
                 "size": len(members),
@@ -65,16 +73,30 @@ def main() -> None:
             }
         )
 
+    return {
+        "cluster_count": cluster_count,
+        "clusters": cluster_payloads,
+    }
+
+
+def main() -> None:
+    args = parse_args()
+    payload = build_clustering_result(
+        args.repo_root,
+        args.data_dir,
+        args.data_glob,
+        args.clusters,
+        args.max_iterations,
+        args.seed,
+    )
+
     write_json(
         args.output_dir / "semantic_purpose_clustering.json",
-        {
-            "cluster_count": cluster_count,
-            "clusters": clusters,
-        },
+        payload,
     )
 
     print("CLUSTERING BY SEMANTIC PURPOSE")
-    for cluster in clusters:
+    for cluster in payload["clusters"]:
         print(
             f"cluster {cluster['cluster_id']} ({cluster['size']} functions) - "
             f"dominant purpose: {cluster['dominant_purpose']}"

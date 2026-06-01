@@ -21,11 +21,11 @@ function-understanding/
 ├── rcutils/
 │   └── Current C source used as the extraction baseline; can be changed to any other repo
 ├── docs/
-│   ├── EMBEDDING_MODEL.md - answer to why did I chose the jina embedding model
+│   ├── EMBEDDING_MODEL.md - answer to why I chose the jina embedding model
 │   └── LABEL.md - answer to why I chose the current label extraction method
 └── config/
-│   ├── label_rules.json - Dictionary with AST labelling features and side effect patterns
-│   └── system_prompt.txt - LLM System prompt for generating high_level_purpose label
+    ├── label_rules.json - Dictionary with AST labelling features and side effect patterns
+    └── system_prompt.txt - LLM System prompt for generating high_level_purpose label
 ```
 
 ## Using A C Repository
@@ -108,3 +108,18 @@ The report includes:
 - strict and soft retrieval variants to separate exact label matches from near-matches
 - clustering purity, cluster-size imbalance, empty-cluster checks, and singleton-cluster checks
 - concrete success and failure cases for human review
+
+## Lightweight UI
+
+Launch the browser UI from the repository root with:
+
+```bash
+python3 app.py
+```
+
+The UI uses the existing retrieval and clustering demos under `src/` and exposes two tabs:
+
+- Function Search: live function-name suggestions, retrieval results, and strict/soft query metrics
+- Cluster Explorer: a cluster slider, scatter plot, and datapoint navigator with name, file path, label, and code preview
+
+The default cluster count is `5`, which is the current best tradeoff for this corpus because it keeps clusters balanced without creating many tiny or empty groups.

@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Function Understanding Lab</title>
+  <style>
+    :root {
+      --bg: #f3efe7;
+      --panel: rgba(255,255,255,0.84);
+      --panel-strong: #fff;
+      --ink: #12212f;
+      --muted: #5b6977;
+      --line: rgba(18,33,47,0.12);
+      --accent: #0f766e;
+      --accent-2: #d97706;
+      --shadow: 0 18px 50px rgba(18,33,47,0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15,118,110,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(217,119,6,0.14), transparent 28%),
+        linear-gradient(180deg, #faf7f1 0%, #efe9de 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .shell { max-width: 1500px; margin: 0 auto; padding: 18px; }
+    .hero {
+      display: flex; justify-content: space-between; gap: 18px; align-items: end;
+      padding: 18px 20px; border: 1px solid var(--line); border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.62));
+      box-shadow: var(--shadow); backdrop-filter: blur(14px);
+    }
+    .eyebrow { margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-size: 12px; font-weight: 800; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; }
+    .lead { margin: 10px 0 0; color: var(--muted); max-width: 76ch; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { padding: 9px 12px; border-radius: 999px; background: rgba(18,33,47,0.06); border: 1px solid rgba(18,33,47,0.08); }
+    .navbar { margin-top: 16px; display: flex; gap: 8px; background: rgba(18,33,47,0.94); padding: 8px; border-radius: 18px; box-shadow: var(--shadow); }
+    .tab-button { border: 0; background: transparent; color: rgba(255,255,255,0.72); padding: 12px 16px; font-weight: 700; border-radius: 12px; cursor: pointer; }
+    .tab-button.active { background: rgba(255,255,255,0.14); color: #fff; }
+    .tab-panel { display: none; margin-top: 16px; }
+    .tab-panel.active { display: block; }
+    .grid { display: grid; gap: 16px; }
+    .search-layout { grid-template-columns: 1.1fr 0.9fr; }
+    .cluster-layout { grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr); }
+    .panel {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); backdrop-filter: blur(14px); overflow: hidden;
+    }
+    .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.42); }
+    .panel-title { margin: 0; font-size: 18px; }
+    .panel-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .panel-body { padding: 18px; }
+    .search-input-row { display: flex; gap: 10px; }
+    .search-input-row input, .search-input-row button, select, input[type=number] { border-radius: 14px; border: 1px solid rgba(18,33,47,0.14); font-size: 15px; }
+    .search-input-row input, select, input[type=number] { padding: 13px 14px; background: rgba(255,255,255,0.96); color: var(--ink); width: 100%; }
+    .search-input-row button, .secondary-button { padding: 13px 16px; background: linear-gradient(135deg, var(--accent), #0b5f58); color: white; font-weight: 800; border: 0; cursor: pointer; white-space: nowrap; }
+    .secondary-button { border-radius: 14px; background: rgba(255,255,255,0.84); color: var(--ink); border: 1px solid rgba(18,33,47,0.14); }
+    .suggestion-box { margin-top: 12px; display: grid; gap: 8px; }
+    .suggestion { padding: 12px 14px; border: 1px solid rgba(18,33,47,0.1); border-radius: 14px; background: rgba(255,255,255,0.84); cursor: pointer; text-align: left; }
+    .suggestion:hover { border-color: rgba(15,118,110,0.35); background: rgba(15,118,110,0.06); }
+    .suggestion .name { font-weight: 800; }
+    .suggestion .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metric-card { padding: 14px; border-radius: 16px; background: rgba(18,33,47,0.04); border: 1px solid rgba(18,33,47,0.08); }
+    .metric-card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .metric-card .value { font-size: 24px; font-weight: 900; margin-top: 6px; }
+    .result-list, .detail-list { display: grid; gap: 10px; }
+    .result-item, .cluster-card, .point-card { border-radius: 16px; border: 1px solid rgba(18,33,47,0.08); background: rgba(255,255,255,0.86); padding: 14px; }
+    .result-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .result-head strong { display: block; font-size: 15px; }
+    .result-head span, .result-meta, .meta, .status { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .score { font-weight: 900; color: var(--accent-2); background: rgba(217,119,6,0.12); padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+    .cluster-toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .cluster-toolbar .mini { width: 110px; }
+    .cluster-visual { background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.76)); }
+    .svg-wrap { padding: 12px 12px 18px; }
+    svg { width: 100%; height: auto; display: block; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 18px 18px; }
+    .legend-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px; background: rgba(18,33,47,0.05); border: 1px solid rgba(18,33,47,0.08); font-size: 13px; }
+    .swatch { width: 12px; height: 12px; border-radius: 999px; }
+    .sidebar { display: grid; gap: 12px; }
+    .cluster-list { display: grid; gap: 10px; max-height: 240px; overflow: auto; padding-right: 4px; }
+    .cluster-card.active { outline: 2px solid rgba(15,118,110,0.22); }
+    .selected-dot { stroke: #12212f !important; stroke-width: 2 !important; }
+    .dim-dot { opacity: 0.22; }
+    .hidden { display: none !important; }
+    @media (max-width: 1120px) {
+      .hero, .search-layout, .cluster-layout { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .shell { padding: 12px; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .search-input-row { flex-direction: column; }
+      .navbar { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Function Understanding Lab</p>
+        <h1>Retrieval & Cluster Explorer</h1>
+        <p class="lead">Minimal UI for exploring retrieval and cluster groupings.</p>
+      </div>
+      <div class="badge-row">
+        <div class="badge">Live search suggestions</div>
+        <div class="badge">Top-k retrieval metrics</div>
+        <div class="badge">Interactive cluster map</div>
+      </div>
+    </section>
+
+    <nav class="navbar">
+      <button class="tab-button active" data-tab="search-tab">Search</button>
+      <button class="tab-button" data-tab="clusters-tab">Clusters</button>
+    </nav>
+
+    <section id="search-tab" class="tab-panel active">
+      <div class="grid search-layout">
+        <div class="panel">
+          <div class="panel-header"><div><h2 class="panel-title">Function Query</h2><p class="panel-subtitle">Type a function name or a short description. Suggestions update as you type, capped at three.</p></div></div>
+          <div class="panel-body">
+            <form id="search-form">
+              <div class="search-input-row">
+                <input id="search-input" type="text" autocomplete="off" placeholder="e.g. rcutils_hash_map_get_next_key_and_data or allocates memory" />
+                <button type="submit">Search similar functions</button>
+              </div>
+            </form>
+            <div id="suggestions" class="suggestion-box"></div>
+            <div id="search-status" class="status" style="margin-top:10px;"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div><h2 class="panel-title">Query Metrics</h2><p class="panel-subtitle">Strict and soft relevance are computed from the query label and the returned neighbors.</p></div></div>
+          <div class="panel-body">
+            <div id="metric-grid" class="metric-grid"></div>
+            <div style="margin-top:16px;"><div class="panel-title" style="font-size:16px; margin-bottom:10px;">Nearest neighbors</div><div id="neighbors" class="result-list"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="clusters-tab" class="tab-panel">
+      <div class="panel">
+        <div class="panel-header">
+          <div><h2 class="panel-title">Cluster Explorer</h2><p class="panel-subtitle">The cluster count defaults to 5 because that setting gave balanced cluster sizes with no empty or singleton clusters in the current evaluation.</p></div>
+          <div class="cluster-toolbar">
+            <label class="status">Clusters</label>
+            <input id="cluster-count" class="mini" type="number" min="2" max="16" value="__DEFAULT_CLUSTER_COUNT__" />
+            <button id="cluster-refresh" class="secondary-button" type="button">Refresh</button>
+          </div>
+        </div>
+        <div class="panel-body grid cluster-layout">
+          <div class="panel cluster-visual">
+            <div class="panel-header" style="border-bottom: 0;"><div><h3 class="panel-title" style="font-size:17px;">Cluster map</h3><p class="panel-subtitle">Points are grouped by cluster proximity for easier inspection.</p></div></div>
+            <div class="svg-wrap"><svg id="cluster-svg" viewBox="0 0 1200 760" preserveAspectRatio="none"></svg></div>
+            <div id="cluster-legend" class="legend"></div>
+          </div>
+
+          <div class="sidebar">
+            <div class="cluster-card"><h4>Cluster summary</h4><div id="cluster-summary" class="meta"></div></div>
+            <div class="cluster-card">
+              <h4>Jump to datapoint</h4>
+              <div class="status" style="margin-bottom:8px;">Pick a cluster, then pick a datapoint inside it.</div>
+              <label class="status">Cluster</label>
+              <select id="cluster-select"></select>
+              <div style="height:10px;"></div>
+              <label class="status">Datapoint</label>
+              <select id="point-select"></select>
+            </div>
+            <div id="point-detail" class="point-card"></div>
+            <div class="cluster-card"><h4>Clusters</h4><div id="cluster-list" class="cluster-list"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const colorPalette = __COLOR_PALETTE__;
+    const defaultClusterCount = __DEFAULT_CLUSTER_COUNT__;
+    const state = { search: null, clusterData: null, selectedClusterId: null, selectedPointId: null };
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    async function requestJSON(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+      return response.json();
+    }
+
+    const tabs = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach((button) => button.addEventListener('click', () => {
+      tabs.forEach((item) => item.classList.remove('active'));
+      panels.forEach((panel) => panel.classList.remove('active'));
+      button.classList.add('active');
+      document.getElementById(button.dataset.tab).classList.add('active');
+    }));
+
+    const searchInput = document.getElementById('search-input');
+    const suggestionsEl = document.getElementById('suggestions');
+    const searchStatus = document.getElementById('search-status');
+    const metricGrid = document.getElementById('metric-grid');
+    const neighborsEl = document.getElementById('neighbors');
+
+    function renderSuggestions(items) {
+      if (!items.length) {
+        suggestionsEl.innerHTML = '<div class="status">No close functions found yet.</div>';
+        return;
+      }
+      suggestionsEl.innerHTML = items.map((item) => `
+        <button class="suggestion" type="button" data-name="${escapeHtml(item.function_name)}">
+          <div class="name">${escapeHtml(item.function_name)} <span class="status">(${item.score.toFixed(3)})</span></div>
+          <div class="meta">${escapeHtml(item.label || 'n/a')}<br/>${escapeHtml(item.file_path)}</div>
+        </button>
+      `).join('');
+      suggestionsEl.querySelectorAll('[data-name]').forEach((button) => {
+        button.addEventListener('click', () => {
+          searchInput.value = button.dataset.name || '';
+          runSearch();
+        });
+      });
+    }
+
+    function renderMetrics(metrics) {
+      const cards = [
+        ['Strict MRR', metrics.strict.mrr.toFixed(3)],
+        ['Strict Recall@3', metrics.strict.recall_at_k['3'] ? 'yes' : 'no'],
+        ['Soft MRR', metrics.soft.mrr.toFixed(3)],
+        ['Soft Recall@3', metrics.soft.recall_at_k['3'] ? 'yes' : 'no'],
+      ];
+      metricGrid.innerHTML = cards.map(([label, value]) => `
+        <div class="metric-card"><div class="label">${label}</div><div class="value">${value}</div></div>
+      `).join('');
+    }
+
+    function renderNeighbors(items) {
+      if (!items.length) {
+        neighborsEl.innerHTML = '<div class="status">No neighbors found.</div>';
+        return;
+      }
+      neighborsEl.innerHTML = items.map((item) => `
+        <article class="result-item">
+          <div class="result-head"><div><strong>${escapeHtml(item.function_name)}</strong><span>${escapeHtml(item.file_path)}</span></div><div class="score">${item.score.toFixed(4)}</div></div>
+          <div class="result-meta">${escapeHtml(item.label || 'n/a')}<br/>source: ${escapeHtml(item.source_file)}</div>
+        </article>
+      `).join('');
+    }
+
+    async function updateSuggestions() {
+      const data = await requestJSON(`/api/suggest?q=${encodeURIComponent(searchInput.value.trim())}`);
+      renderSuggestions(data.suggestions || []);
+    }
+
+    async function runSearch() {
+      const query = searchInput.value.trim();
+      if (!query) return;
+      searchStatus.textContent = 'Loading similar functions...';
+      const data = await requestJSON(`/api/search?q=${encodeURIComponent(query)}`);
+      state.search = data;
+      searchStatus.textContent = `Selected query: ${data.selected_query.function_name} · ${data.selected_query.label || 'n/a'}`;
+      renderSuggestions(data.suggestions || []);
+      renderMetrics(data.retrieval.metrics);
+      renderNeighbors(data.retrieval.neighbors || []);
+    }
+
+    searchInput.addEventListener('input', () => updateSuggestions().catch((error) => {
+      suggestionsEl.innerHTML = `<div class="status">${escapeHtml(error.message)}</div>`;
+    }));
+
+    document.getElementById('search-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      runSearch().catch((error) => { searchStatus.textContent = error.message; });
+    });
+
+    function currentClusterPoints() {
+      return (state.clusterData?.points || []).filter((point) => point.cluster_id === state.selectedClusterId);
+    }
+
+    function selectPoint(pointId) {
+      state.selectedPointId = pointId;
+      const point = state.clusterData.points.find((item) => item.id === pointId);
+      if (point) state.selectedClusterId = point.cluster_id;
+      renderClusterUI();
+    }
+
+    function renderClusterSummary(data) {
+      const sizes = data.clusters.map((cluster) => cluster.size);
+      document.getElementById('cluster-summary').innerHTML = [
+        `Cluster count: ${data.cluster_count}`,
+        `Recommended baseline: ${data.recommended_cluster_count}`,
+        `Largest cluster: ${Math.max(...sizes)} items`,
+        `Smallest cluster: ${Math.min(...sizes)} items`,
+        `Average size: ${data.summary.mean_size}`,
+      ].join('<br/>');
+    }
+
+    function renderLegend(data) {
+      document.getElementById('cluster-legend').innerHTML = data.clusters.map((cluster) => `
+        <div class="legend-chip"><span class="swatch" style="background:${colorPalette[cluster.cluster_id % colorPalette.length]}"></span>Cluster ${cluster.cluster_id} · ${cluster.size} items</div>
+      `).join('');
+    }
+
+    function renderClusterSelectors(data) {
+      const clusterSelect = document.getElementById('cluster-select');
+      const pointSelect = document.getElementById('point-select');
+      clusterSelect.innerHTML = data.clusters.map((cluster) => `<option value="${cluster.cluster_id}" ${String(cluster.cluster_id) === String(state.selectedClusterId) ? 'selected' : ''}>Cluster ${cluster.cluster_id} · ${cluster.size} items</option>`).join('');
+      clusterSelect.onchange = () => {
+        state.selectedClusterId = Number(clusterSelect.value);
+        state.selectedPointId = currentClusterPoints()[0]?.id ?? null;
+        renderClusterUI();
+      };
+
+      const points = currentClusterPoints();
+      pointSelect.innerHTML = points.map((point) => `<option value="${point.id}" ${point.id === state.selectedPointId ? 'selected' : ''}>${escapeHtml(point.function_name)} · ${escapeHtml(point.label || 'n/a')}</option>`).join('');
+      pointSelect.onchange = () => {
+        state.selectedPointId = Number(pointSelect.value);
+        renderClusterUI();
+      };
+    }
+
+    function renderClusterList(data) {
+      const list = document.getElementById('cluster-list');
+      list.innerHTML = data.clusters.map((cluster) => `
+        <div class="cluster-card ${cluster.cluster_id === state.selectedClusterId ? 'active' : ''}" data-cluster-id="${cluster.cluster_id}">
+          <h4>Cluster ${cluster.cluster_id}</h4>
+          <div class="meta">size: ${cluster.size}<br/>dominant purpose: ${escapeHtml(cluster.dominant_purpose)}<br/>purity cue: ${cluster.dominant_purpose_count}/${cluster.size}</div>
+        </div>
+      `).join('');
+      list.querySelectorAll('[data-cluster-id]').forEach((card) => {
+        card.addEventListener('click', () => {
+          state.selectedClusterId = Number(card.dataset.clusterId);
+          state.selectedPointId = currentClusterPoints()[0]?.id ?? null;
+          renderClusterUI();
+        });
+      });
+    }
+
+    function renderPointDetail(data) {
+      const point = data.points.find((item) => item.id === state.selectedPointId) || currentClusterPoints()[0] || data.points[0];
+      if (!point) return;
+      state.selectedPointId = point.id;
+      document.getElementById('point-detail').innerHTML = `
+        <h4>${escapeHtml(point.function_name)}</h4>
+        <div class="meta">cluster: ${point.cluster_id}<br/>label: ${escapeHtml(point.label || 'n/a')}<br/>file: ${escapeHtml(point.file_path)}<br/>source: ${escapeHtml(point.source_file)}</div>
+        <pre style="white-space:pre-wrap; margin:12px 0 0; font-size:12px; line-height:1.55; color:var(--ink);">${escapeHtml(point.function_code || '')}</pre>
+      `;
+    }
+
+    function renderSvg(data) {
+      const svg = document.getElementById('cluster-svg');
+      const width = 1200;
+      const height = 760;
+      const padding = 56;
+      const plotWidth = width - (padding * 2);
+      const plotHeight = height - (padding * 2);
+
+      // build cluster centers (arrange centers on a circle)
+      const clusters = data.clusters || [];
+      const clusterCount = Math.max(1, clusters.length);
+      const centerX = padding + (plotWidth / 2);
+      const centerY = padding + (plotHeight / 2);
+      const clusterRingRadius = Math.min(plotWidth, plotHeight) * 0.32;
+      const clusterCenters = {};
+      clusters.forEach((cluster, idx) => {
+        const angle = (idx / clusterCount) * Math.PI * 2;
+        const cx = centerX + Math.cos(angle) * clusterRingRadius;
+        const cy = centerY + Math.sin(angle) * clusterRingRadius;
+        clusterCenters[cluster.cluster_id] = { cx, cy };
+      });
+
+      // helper to find rank of a point within its cluster (fallback to point.cluster_member_rank)
+      const clusterMemberIndex = {};
+      clusters.forEach((c) => {
+        if (Array.isArray(c.members)) {
+          c.members.forEach((m, i) => { clusterMemberIndex[m.id] = i; });
+        }
+      });
+
+      // golden angle for even distribution
+      const GOLDEN_ANGLE = 2.399963229728653;
+
+      const circleElements = data.points.map((point) => {
+        const selected = point.id === state.selectedPointId;
+        const highlighted = point.cluster_id === state.selectedClusterId;
+
+        const center = clusterCenters[point.cluster_id] || { cx: centerX, cy: centerY };
+
+        // determine rank (0 = closest to centroid)
+        const rank = (typeof point.cluster_member_rank === 'number') ? point.cluster_member_rank : (clusterMemberIndex[point.id] ?? 0);
+        const clusterSize = (clusters.find((c) => c.cluster_id === point.cluster_id)?.size) || 8;
+
+        // place members in concentric rings using golden angle
+        const ringIndex = Math.floor(Math.sqrt(rank));
+        const angle = (rank * GOLDEN_ANGLE) % (Math.PI * 2);
+        const baseRadius = 6 + (ringIndex * 12);
+        const radius = baseRadius + (Math.max(0, (clusterSize - rank) / Math.max(1, clusterSize)) * 6);
+
+        const cx = center.cx + Math.cos(angle) * radius;
+        const cy = center.cy + Math.sin(angle) * radius;
+
+        return `<circle class="plot-dot ${selected ? 'selected-dot' : ''} ${highlighted ? '' : 'dim-dot'}" data-point-id="${point.id}" cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="${selected ? 8 : 5.5}" fill="${point.color}" stroke="rgba(255,255,255,0.85)" stroke-width="1"><title>${escapeHtml(point.function_name)} | ${escapeHtml(point.label || 'n/a')}</title></circle>`;
+      }).join('');
+
+      svg.innerHTML = `
+        <rect x="18" y="18" width="${width - 36}" height="${height - 36}" rx="24" fill="rgba(255,255,255,0.72)" stroke="rgba(18,33,47,0.08)" />
+        <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" stroke="rgba(18,33,47,0.15)" />
+        <line x1="${padding}" y1="${padding}" x2="${padding}" y2="${height - padding}" stroke="rgba(18,33,47,0.15)" />
+        ${circleElements}
+      `;
+
+      svg.querySelectorAll('[data-point-id]').forEach((node) => {
+        node.addEventListener('click', () => {
+          const pointId = Number(node.getAttribute('data-point-id'));
+          const point = data.points.find((item) => item.id === pointId);
+          state.selectedPointId = pointId;
+          state.selectedClusterId = point.cluster_id;
+          renderClusterUI();
+        });
+      });
+    }
+
+    function renderClusterUI() {
+      const data = state.clusterData;
+      if (!data) return;
+      renderClusterSummary(data);
+      renderLegend(data);
+      renderClusterSelectors(data);
+      renderClusterList(data);
+      renderPointDetail(data);
+      renderSvg(data);
+    }
+
+    async function loadClusters() {
+      const count = Math.max(2, Math.min(16, Number(document.getElementById('cluster-count').value || defaultClusterCount)));
+      document.getElementById('cluster-count').value = count;
+      const data = await requestJSON(`/api/clusters?count=${count}`);
+      state.clusterData = data;
+      state.selectedClusterId = data.clusters[0]?.cluster_id ?? 0;
+      state.selectedPointId = data.points.find((point) => point.cluster_id === state.selectedClusterId)?.id ?? data.points[0]?.id ?? null;
+      renderClusterUI();
+    }
+
+    document.getElementById('cluster-refresh').addEventListener('click', () => loadClusters().catch((error) => {
+      document.getElementById('cluster-summary').textContent = error.message;
+    }));
+
+    async function bootstrap() {
+      const config = await requestJSON('/api/config');
+      searchInput.value = config.default_query || '';
+      renderSuggestions(config.suggestions || []);
+      await updateSuggestions();
+      await runSearch();
+      await loadClusters();
+    }
+
+    bootstrap().catch((error) => {
+      searchStatus.textContent = error.message;
+    });
+  </script>
+</body>
+</html>
